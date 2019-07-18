@@ -3,6 +3,7 @@ import { Container } from 'native-base';
 import * as Font from 'expo-font'; //to include font from expo.
 import { LoginScreen } from './app/screen/user/LoginScreen'
 import { SignupScreen } from './app/screen/user/SignupScreen'
+import { EventListScreen } from './app/screen/event/EventListScreen'
 export default class App extends React.Component {
   //checking state for if font is loaded or not.
   state = {
@@ -20,8 +21,7 @@ export default class App extends React.Component {
     return (
       <Container>
         {this.state.fontLoaded ? (
-
-          <LoginScreen/>
+          <EventListScreen />
         ) : null}
       </Container>
     );
