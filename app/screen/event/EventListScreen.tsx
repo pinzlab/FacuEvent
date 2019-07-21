@@ -5,6 +5,7 @@ import { Left, Right, Body, Icon, Button, Text } from 'native-base';
 import { Header, Title, } from 'native-base';
 import { Card, CardItem, Spinner } from 'native-base';
 import { EventService } from '../../service/EventService';
+import { color } from '../../util/config';
 
 
 export default class EventListScreen extends React.Component {
@@ -51,7 +52,7 @@ export default class EventListScreen extends React.Component {
                         </Left>
                         <Right>
                             <Button transparent onPress={() => { console.log(event.name) }}>
-                                <Icon active name="eye" />
+                                <Icon style={{ color: color.secondary }} active name="eye" />
                             </Button>
                         </Right>
                     </CardItem>
@@ -61,17 +62,6 @@ export default class EventListScreen extends React.Component {
 
         return (
             <Container>
-                <Header>
-                    <Left>
-                        <Button transparent>
-                            <Icon name='menu' />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title>FacuEvent</Title>
-                    </Body>
-                    <Right />
-                </Header>
                 {
                     !this.state.isLoading
                         ? (<Content>

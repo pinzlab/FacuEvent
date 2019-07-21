@@ -1,11 +1,12 @@
 import React from 'react';
+import { Router, Scene } from 'react-native-router-flux';
 import { Container } from 'native-base';
 import * as Font from 'expo-font'; //to include font from expo.
 import LoginScreen from './app/screen/user/LoginScreen'
 import SignupScreen from './app/screen/user/SignupScreen'
 import EventListScreen from './app/screen/event/EventListScreen'
+import { color } from './app/util/config'
 
-import { Router, Scene } from 'react-native-router-flux';
 
 export default class App extends React.Component {
   //checking state for if font is loaded or not.
@@ -29,7 +30,7 @@ export default class App extends React.Component {
             <Scene key="root">
               <Scene key="login" component={LoginScreen} hideNavBar={true} initial={true} />
               <Scene key="signup" component={SignupScreen} hideNavBar={true} />
-              <Scene key="EventListScreen" component={EventListScreen} navigationBarStyle={{ backgroundColor: '#81b71a' }} title="PageTwo" />
+              <Scene key="eventListScreen" component={EventListScreen} navigationBarStyle={{ backgroundColor: color.primary }} title="Eventos" />
             </Scene>
           </Router>
         ) : null}

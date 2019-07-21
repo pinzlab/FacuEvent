@@ -4,6 +4,7 @@ import { Container, Content } from 'native-base';
 import { Form, Item, Label, Input, Button, Text } from 'native-base';
 import { Footer, FooterTab, Thumbnail, View, Icon } from 'native-base';
 import { UserService } from '../../service/UserService';
+import { color } from '../../util/config'
 
 
 
@@ -37,7 +38,7 @@ export default class LoginScreen extends React.Component {
                 }).finally(
                     () => {
                         if (this.isLogged)
-                            Actions.EventListScreen();
+                            Actions.eventListScreen();
                         else
                             this.setState({
                                 unauthorized: (!this.isLogged) ? true : false,
@@ -72,7 +73,9 @@ export default class LoginScreen extends React.Component {
                             {(this.state.passwordError) ? (
                                 <Icon name='close-circle' />
                             ) : (
-                                    <Icon onPress={() => this.setState({ showPassword: !this.state.showPassword })} name='eye' />
+                                    <Icon
+                                        style={{ color: (this.state.showPassword) ? color.secondary : color.grey }}
+                                        onPress={() => this.setState({ showPassword: !this.state.showPassword })} name='eye' />
                                 )}
 
                         </Item>
@@ -85,7 +88,7 @@ export default class LoginScreen extends React.Component {
 
                         {(this.state.unauthorized) ? (
                             <Text style={{
-                                backgroundColor: '#ff5050',
+                                backgroundColor: color.danger,
                                 width: '100%',
                                 marginBottom: 25,
                                 paddingVertical: 5,
@@ -95,7 +98,7 @@ export default class LoginScreen extends React.Component {
                             }}>Correo electrónico o contraseña incorrectos</Text>
                         ) : null}
 
-                        <Button full style={{ backgroundColor: '#0097fc' }} onPress={() => { this.login() }}>
+                        <Button full style={{ backgroundColor: color.primary }} onPress={() => { this.login() }}>
                             <Text>Entrar</Text>
                         </Button>
                     </View>
@@ -104,9 +107,13 @@ export default class LoginScreen extends React.Component {
                 </Content>
                 <Footer style={{ backgroundColor: 'transparent' }}>
                     <FooterTab style={{ backgroundColor: 'transparent' }}>
-                        <Button style={{ backgroundColor: '#0097fc', margin: 10, color: '#fff' }}
+                        <Button style={{ backgroundColor: color.primary, margin: 10, color: '#fff' }}
                             onPress={() => { Actions.signup(); }}>
                             <Text>Regístrate</Text>
+                        </Button>
+                        <Button
+                            onPress={() => { Actions.eventListScreen(); }}>
+                            <Text>eventos</Text>
                         </Button>
                     </FooterTab>
                 </Footer>
