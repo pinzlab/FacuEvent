@@ -1,4 +1,5 @@
 import React from 'react';
+import { Actions } from 'react-native-router-flux';
 import { Container, Content } from 'native-base';
 import { Form, Item, Label, Input, Button, Text } from 'native-base';
 import { Footer, FooterTab, Thumbnail, View } from 'native-base';
@@ -55,17 +56,18 @@ export default class SignupScreen extends React.Component {
           </Form>
 
           <View style={{ alignItems: 'center', paddingHorizontal: 10, paddingTop: 30 }}>
-            <Button full onPress={() => { this.signup() }}>
+            <Button full style={{ backgroundColor: '#0097fc' }} onPress={() => { this.signup() }}>
               <Text>Regístrate</Text>
             </Button>
           </View>
 
 
         </Content>
-        <Footer >
-          <FooterTab>
-            <Button full >
-              <Text>Footer</Text>
+        <Footer style={{ backgroundColor: 'transparent' }}>
+          <FooterTab style={{ backgroundColor: 'transparent' }}>
+            <Button style={{ backgroundColor: '#0097fc', margin: 10, color: '#fff' }}
+              onPress={() => { Actions.login(); }}>
+              <Text>Logearse</Text>
             </Button>
           </FooterTab>
         </Footer>

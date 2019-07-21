@@ -3,8 +3,10 @@ import { Container } from 'native-base';
 import * as Font from 'expo-font'; //to include font from expo.
 import LoginScreen from './app/screen/user/LoginScreen'
 import SignupScreen from './app/screen/user/SignupScreen'
-import HomeScreen from './app/screen/home/HomeScreen'
 import EventListScreen from './app/screen/event/EventListScreen'
+
+import { Router, Scene } from 'react-native-router-flux';
+
 export default class App extends React.Component {
   //checking state for if font is loaded or not.
   public state: any = {
@@ -23,7 +25,13 @@ export default class App extends React.Component {
     return (
       <Container>
         {this.state.isReady ? (
-          <EventListScreen />
+          <Router >
+            <Scene key="root">
+              <Scene key="login" component={LoginScreen} hideNavBar={true} initial={true} />
+              <Scene key="signup" component={SignupScreen} hideNavBar={true} />
+              <Scene key="EventListScreen" component={EventListScreen} navigationBarStyle={{ backgroundColor: '#81b71a' }} title="PageTwo" />
+            </Scene>
+          </Router>
         ) : null}
       </Container>
     );
