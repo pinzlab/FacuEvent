@@ -6,7 +6,7 @@ import { UserService } from '../../service/UserService';
 
 
 
-export class LoginScreen extends React.Component {
+export default class LoginScreen extends React.Component {
 
     //checking state for if font is loaded or not.
     public state: any = {
@@ -50,7 +50,7 @@ export class LoginScreen extends React.Component {
 
                     <View style={{ alignItems: 'center', paddingHorizontal: 10, paddingTop: 50 }}>
                         <Button full onPress={() => { this.login() }}>
-                            <Text>Regístrate</Text>
+                            <Text>Entrar</Text>
                         </Button>
                     </View>
 
@@ -59,7 +59,7 @@ export class LoginScreen extends React.Component {
                 <Footer >
                     <FooterTab>
                         <Button full >
-                            <Text>Footer</Text>
+                            <Text>Regístrate</Text>
                         </Button>
                     </FooterTab>
                 </Footer>

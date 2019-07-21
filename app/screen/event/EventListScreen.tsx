@@ -7,9 +7,7 @@ import { Card, CardItem, Spinner } from 'native-base';
 import { EventService } from '../../service/EventService';
 
 
-
-
-export class EventListScreen extends React.Component {
+export default class EventListScreen extends React.Component {
 
     public events: any = [];
 
@@ -53,7 +51,7 @@ export class EventListScreen extends React.Component {
                         </Left>
                         <Right>
                             <Button transparent onPress={() => { console.log(event.name) }}>
-                                <Icon active name="thumbs-up" />
+                                <Icon active name="eye" />
                             </Button>
                         </Right>
                     </CardItem>

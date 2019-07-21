@@ -5,7 +5,7 @@ import { Footer, FooterTab, Thumbnail, View } from 'native-base';
 
 
 
-export class SignupScreen extends React.Component {
+export default class SignupScreen extends React.Component {
 
   //checking state for if font is loaded or not.
   public state: any = {
