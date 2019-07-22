@@ -1,8 +1,9 @@
 import React from 'react';
+import { Actions } from 'react-native-router-flux';
 import { Image } from 'react-native';
 import { Container, Content } from 'native-base';
-import { Left, Right, Body, Icon, Button, Text } from 'native-base';
-import { Card, CardItem, Spinner, List, ListItem } from 'native-base';
+import { Right, Body, Icon, Text, Spinner } from 'native-base';
+import { Card, CardItem, List, ListItem } from 'native-base';
 import { EventService } from '../../service/EventService';
 import { color } from '../../util/config';
 
@@ -10,7 +11,7 @@ import { color } from '../../util/config';
 export default class EventScreen extends React.Component {
 
     public event: any;
-
+    public props: any
     public state: any = {
         // state of charge of events
         isLoading: true
@@ -18,7 +19,7 @@ export default class EventScreen extends React.Component {
 
     componentDidMount() {
         let service: EventService = new EventService()
-        service.getById(1)
+        service.getById(this.props.id)
             .then((res: any) => {
                 this.event = res.event
                 this.setState({
@@ -39,7 +40,7 @@ export default class EventScreen extends React.Component {
         if (this.event !== undefined)
             this.event.activities.forEach((activity: any, index: number) => {
                 activitiesListView.push(
-                    <ListItem key={index} onPress={() => { console.log(activity.name) }}>
+                    <ListItem key={index} onPress={() => { Actions.activityScreen({ id: activity.id }) }}>
                         <Body><Text>{activity.name}</Text></Body>
                         <Right><Icon name='arrow-forward' /></Right>
                     </ListItem>
