@@ -3,6 +3,7 @@ import { Scene, Router, Drawer, } from 'react-native-router-flux';
 import { StyleSheet } from 'react-native'
 import { Container } from 'native-base';
 import * as Font from 'expo-font'; //to include font from expo.
+import Authentication from './app/component/Authentication'
 import LoginScreen from './app/screen/user/LoginScreen'
 import SignupScreen from './app/screen/user/SignupScreen'
 import EventListScreen from './app/screen/event/EventListScreen'
@@ -12,6 +13,7 @@ import ProfessionalScreen from './app/screen/professional/professionalScreen'
 import { color } from './app/util/config'
 
 import DrawerContent from './app/component/DrawerContent';
+import SettingsScreen from './app/screen/settings/SettingsScreen';
 
 
 
@@ -41,8 +43,8 @@ export default class App extends React.Component {
 
             <Scene key="root" hideNavBar>
 
-              <Scene key="auth">
-                <Scene key="login" component={LoginScreen} initial hideNavBar />
+              <Scene key="auth" component={Authentication} initial hideNavBar >
+                <Scene key="login" component={LoginScreen} hideNavBar />
                 <Scene key="signup" component={SignupScreen} hideNavBar />
               </Scene>
 
@@ -59,6 +61,12 @@ export default class App extends React.Component {
                       navigationBarStyle={{ backgroundColor: color.primary }}
                       titleStyle={{ color: '#fff' }}
                       title="Eventos" />
+                    <Scene
+                      key="settingsScreen"
+                      component={SettingsScreen}
+                      navigationBarStyle={{ backgroundColor: color.primary }}
+                      titleStyle={{ color: '#fff' }}
+                      title="Configuraciones" />
                   </Scene>
                 </Drawer>
 
@@ -67,7 +75,7 @@ export default class App extends React.Component {
                   component={EventScreen}
                   navigationBarStyle={{ backgroundColor: color.primary }}
                   titleStyle={{ color: '#FFF' }}
-                  backToInitial              
+                  backToInitial
                   title="Evento" />
 
                 <Scene

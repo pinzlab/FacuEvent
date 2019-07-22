@@ -13,8 +13,6 @@ export default class LoginScreen extends React.Component {
     //checking state for if font is loaded or not.
     public isLogged: boolean = false;
     public state: any = {
-        emailAddress: 'aldaboad@gmail.com',
-        password: 'adminP4$$',
         showPassword: true
     }
 
