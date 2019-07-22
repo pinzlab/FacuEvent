@@ -43,7 +43,8 @@ export default class App extends React.Component {
 
             <Scene key="root" hideNavBar>
 
-              <Scene key="auth" component={Authentication} initial hideNavBar >
+              <Scene key="auth" hideNavBar >
+                <Scene key="authentication" component={Authentication} initial hideNavBar />
                 <Scene key="login" component={LoginScreen} hideNavBar />
                 <Scene key="signup" component={SignupScreen} hideNavBar />
               </Scene>
