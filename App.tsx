@@ -37,7 +37,7 @@ export default class App extends React.Component {
     return (
       <Container>
         {this.state.isReady ? (
-          <Router>
+          <Router sceneStyle={{ backgroundColor: '#81b71a' }}>
 
             <Scene key="root" hideNavBar>
 
@@ -53,13 +53,37 @@ export default class App extends React.Component {
                   contentComponent={DrawerContent}
                   drawerWidth={300}>
                   <Scene key='root'>
-                    <Scene key="eventListScreen" component={EventListScreen} navigationBarStyle={{ backgroundColor: color.primary }} title="Eventos" />
+                    <Scene
+                      key="eventListScreen"
+                      component={EventListScreen}
+                      navigationBarStyle={{ backgroundColor: color.primary }}
+                      titleStyle={{ color: '#fff' }}
+                      title="Eventos" />
                   </Scene>
                 </Drawer>
-         
-                <Scene key="eventScreen" component={EventScreen} navigationBarStyle={{ backgroundColor: color.primary }} title="Evento" />
-                <Scene key="activityScreen" component={ActivityScreen} navigationBarStyle={{ backgroundColor: color.primary }} title="Actividad" />
-                <Scene key="professionalScreen" component={ProfessionalScreen} navigationBarStyle={{ backgroundColor: color.primary }} title="Perfil Profesional" />
+
+                <Scene
+                  key="eventScreen"
+                  component={EventScreen}
+                  navigationBarStyle={{ backgroundColor: color.primary }}
+                  titleStyle={{ color: '#FFF' }}
+                  backToInitial              
+                  title="Evento" />
+
+                <Scene
+                  key="activityScreen"
+                  component={ActivityScreen}
+                  navigationBarStyle={{ backgroundColor: color.primary }}
+                  titleStyle={{ color: '#fff' }}
+                  title="Actividad" />
+
+                <Scene
+                  key="professionalScreen"
+                  component={ProfessionalScreen}
+                  navigationBarStyle={{ backgroundColor: color.primary }}
+                  titleStyle={{ color: '#fff' }}
+                  title="Perfil Profesional" />
+
               </Scene>
 
             </Scene>
