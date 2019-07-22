@@ -1,6 +1,6 @@
 import { serverUrl } from '../util/config'
 
-export class ProfessionalService {
+export default class ProfessionalService {
 
     public async getById(id: number) {
         return await fetch(`${serverUrl}/api/v1/professional/${id}`)

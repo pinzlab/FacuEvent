@@ -2,8 +2,8 @@ import React from 'react';
 import { Actions } from 'react-native-router-flux';
 import { Container, Content } from 'native-base';
 import { Form, Item, Label, Input, Button, Text } from 'native-base';
-import { Footer, FooterTab, Thumbnail, View, Icon } from 'native-base';
-import { UserService } from '../../service/UserService';
+import { Thumbnail, View, Icon } from 'native-base';
+import UserService from '../../service/UserService';
 import { color } from '../../util/config'
 
 
@@ -13,11 +13,12 @@ export default class LoginScreen extends React.Component {
     //checking state for if font is loaded or not.
     public isLogged: boolean = false;
     public state: any = {
+        emailAddress: 'aldaboad@gmail.com',
+        password: 'adminP4$$',
         showPassword: true
     }
 
     private login(): void {
-        console.log(this.state.emailAddress)
         this.setState({
             emailError: (this.state.emailAddress === undefined) ? true : false,
             passwordError: (this.state.password === undefined) ? true : false,
@@ -38,7 +39,8 @@ export default class LoginScreen extends React.Component {
                 }).finally(
                     () => {
                         if (this.isLogged)
-                            Actions.eventListScreen();
+                            Actions.replace('main');
+
                         else
                             this.setState({
                                 unauthorized: (!this.isLogged) ? true : false,
@@ -98,25 +100,16 @@ export default class LoginScreen extends React.Component {
                             }}>Correo electrónico o contraseña incorrectos</Text>
                         ) : null}
 
-                        <Button full style={{ backgroundColor: color.primary }} onPress={() => { this.login() }}>
+                        <Button full rounded style={{ backgroundColor: color.primary }} onPress={() => { this.login() }}>
                             <Text>Entrar</Text>
+                        </Button>
+                        <Button full rounded style={{ backgroundColor: color.primary, marginVertical: 25 }} onPress={() => { Actions.replace('signup') }}>
+                            <Text>Registrarse</Text>
                         </Button>
                     </View>
 
 
                 </Content>
-                <Footer style={{ backgroundColor: 'transparent' }}>
-                    <FooterTab style={{ backgroundColor: 'transparent' }}>
-                        <Button style={{ backgroundColor: color.primary, margin: 10, color: '#fff' }}
-                            onPress={() => { Actions.signup(); }}>
-                            <Text>Regístrate</Text>
-                        </Button>
-                        <Button
-                            onPress={() => { Actions.replace('eventListScreen') }}>
-                            <Text>eventos</Text>
-                        </Button>
-                    </FooterTab>
-                </Footer>
             </Container>
         );
     }

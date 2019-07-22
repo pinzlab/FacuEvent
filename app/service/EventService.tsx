@@ -1,6 +1,6 @@
 import { serverUrl } from '../util/config'
 
-export class EventService {
+export default class EventService {
     public async getAll() {
         return await fetch(`${serverUrl}/api/v1/events`)
             .then((res: any) => res.json())

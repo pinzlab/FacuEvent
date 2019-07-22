@@ -1,6 +1,6 @@
 import { serverUrl } from '../util/config'
 
-export class ActivityService {
+export default class ActivityService {
 
     public async getById(id: number) {
         return await fetch(`${serverUrl}/api/v1/activity/${id}`)

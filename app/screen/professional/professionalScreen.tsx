@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Content, Button } from 'native-base';
 import { Right, Body, Icon, Text, Spinner } from 'native-base';
 import { Card, Thumbnail, List, ListItem } from 'native-base';
-import { ProfessionalService } from '../../service/ProfessionalService';
+import  ProfessionalService  from '../../service/ProfessionalService';
 import { color } from '../../util/config';
 
 

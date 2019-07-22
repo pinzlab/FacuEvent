@@ -3,7 +3,7 @@ import { Actions } from 'react-native-router-flux';
 import { Container, Content, Button } from 'native-base';
 import { Right, Body, Icon, Text, Spinner } from 'native-base';
 import { Card, CardItem, List, ListItem } from 'native-base';
-import { ActivityService } from '../../service/ActivityService';
+import ActivityService from '../../service/ActivityService';
 import { color } from '../../util/config';
 
 

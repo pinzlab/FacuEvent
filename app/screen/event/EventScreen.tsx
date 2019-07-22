@@ -4,7 +4,7 @@ import { Image } from 'react-native';
 import { Container, Content } from 'native-base';
 import { Right, Body, Icon, Text, Spinner } from 'native-base';
 import { Card, CardItem, List, ListItem } from 'native-base';
-import { EventService } from '../../service/EventService';
+import EventService from '../../service/EventService';
 import { color } from '../../util/config';
 
 
