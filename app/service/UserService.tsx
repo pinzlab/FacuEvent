@@ -40,16 +40,20 @@ export default class UserService {
 
     }
 
+
+    public async logout() {
+        await AsyncStorage.setItem('isLogged', 'false')
+        return await AsyncStorage.removeItem('cookies')
+    }
+
     public async me() {
-        try {
-            const cookies: string = await AsyncStorage.getItem('cookies');
-            if (cookies !== null)
-                return await fetch(`${serverUrl}/api/v1/account/me`, { headers: JSON.parse(cookies) })
-                    .then((res: any) => res.json())
-                    .then((res: any) => { return res })
-        } catch (error) {
-            console.log(' Error retrieving data')
-        }
+
+        const cookies: string = await AsyncStorage.getItem('cookies');
+        if (cookies !== null)
+            return await fetch(`${serverUrl}/api/v1/account/me`, { headers: JSON.parse(cookies) })
+                .then((res: any) => res.json())
+                .then((res: any) => { return res })
+
 
     }
 }

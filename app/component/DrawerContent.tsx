@@ -4,6 +4,7 @@ import { Footer, FooterTab, Button, Icon } from 'native-base'
 import { Body, Left, Right } from 'native-base'
 import { Actions } from 'react-native-router-flux';
 import { color } from '../util/config'
+import Logout from './Logout';
 
 
 export default class DrawerContent extends React.Component {
@@ -31,9 +32,7 @@ export default class DrawerContent extends React.Component {
                         <Button onPress={Actions.settingsScreen}>
                             <Icon name="settings" />
                         </Button>
-                        <Button>
-                            <Icon name="exit" />
-                        </Button>
+                       <Logout/>
                     </FooterTab>
                 </Footer>
             </Container>
