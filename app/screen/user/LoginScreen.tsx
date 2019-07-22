@@ -112,7 +112,7 @@ export default class LoginScreen extends React.Component {
                             <Text>Regístrate</Text>
                         </Button>
                         <Button
-                            onPress={() => { Actions.eventListScreen(); }}>
+                            onPress={() => { Actions.replace('eventListScreen') }}>
                             <Text>eventos</Text>
                         </Button>
                     </FooterTab>
