@@ -50,11 +50,12 @@ export default class ActivityScreen extends React.Component {
                                         <Text note>{this.activity.place}</Text>
                                     </Body>
                                 </ListItem>
-                                <ListItem >
+                                <ListItem onPress={() => { Actions.professionalScreen({ id: this.activity.inCharge.id }) }}>
                                     <Body>
                                         <Text>Persona a Cargo</Text>
                                         <Text note>{this.activity.inCharge.lastName} {this.activity.inCharge.firstName}</Text>
                                     </Body>
+                                    <Right><Icon name='arrow-forward' /></Right>
                                 </ListItem>
                                 <ListItem >
                                     <Body>
@@ -79,7 +80,7 @@ export default class ActivityScreen extends React.Component {
 
                             </List>
                             {(this.activity.requireInscription) ? (
-                                <Button 
+                                <Button
                                     onPress={() => { console.log(`Suscribirse: "${this.activity.name}"`) }}
                                     disabled={!(this.activity.quota > 0)}
                                     full style={{
