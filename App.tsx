@@ -5,6 +5,7 @@ import * as Font from 'expo-font'; //to include font from expo.
 import LoginScreen from './app/screen/user/LoginScreen'
 import SignupScreen from './app/screen/user/SignupScreen'
 import EventListScreen from './app/screen/event/EventListScreen'
+import EventScreen from './app/screen/event/EventScreen'
 import { color } from './app/util/config'
 
 
@@ -31,6 +32,7 @@ export default class App extends React.Component {
               <Scene key="login" component={LoginScreen} hideNavBar={true} initial={true} />
               <Scene key="signup" component={SignupScreen} hideNavBar={true} />
               <Scene key="eventListScreen" component={EventListScreen} navigationBarStyle={{ backgroundColor: color.primary }} title="Eventos" />
+              <Scene key="eventScreen" component={EventScreen} navigationBarStyle={{ backgroundColor: color.primary }} title="Evento" />
             </Scene>
           </Router>
         ) : null}

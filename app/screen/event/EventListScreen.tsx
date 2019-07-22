@@ -1,8 +1,8 @@
 import React from 'react';
+import { Actions } from 'react-native-router-flux';
 import { Image } from 'react-native';
 import { Container, Content } from 'native-base';
 import { Left, Right, Body, Icon, Button, Text } from 'native-base';
-import { Header, Title, } from 'native-base';
 import { Card, CardItem, Spinner } from 'native-base';
 import { EventService } from '../../service/EventService';
 import { color } from '../../util/config';
@@ -51,7 +51,7 @@ export default class EventListScreen extends React.Component {
                             </Body>
                         </Left>
                         <Right>
-                            <Button transparent onPress={() => { console.log(event.name) }}>
+                            <Button transparent onPress={() => { Actions.eventScreen(); }}>
                                 <Icon style={{ color: color.secondary }} active name="eye" />
                             </Button>
                         </Right>
