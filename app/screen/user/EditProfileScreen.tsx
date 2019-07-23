@@ -1,11 +1,13 @@
 import React from 'react';
 import * as Permissions from 'expo-permissions'
 import * as ImagePicker from 'expo-image-picker'
+import { Actions } from 'react-native-router-flux';
 import { Container, Content, Button } from 'native-base';
 import { Right, Body, Left, Icon, Text, Spinner } from 'native-base';
 import { Card, Thumbnail, List, ListItem } from 'native-base';
 import { View, Form, Item, Label, Input } from 'native-base';
 import { color } from '../../util/config';
+import UserService from '../../service/UserService';
 
 
 export default class EditProfileScreen extends React.Component {
@@ -67,11 +69,20 @@ export default class EditProfileScreen extends React.Component {
 
 
     public async update() {
+        const service: UserService = new UserService()
         if (this.isValid())
-            console.log('valido')
-        else
-            console.log('invalido')
-        console.log(this.state)
+            service.updateProfile(
+                this.state.lastName,
+                this.state.firstName,
+                this.state.telephone)
+                .then((res: any) => {
+                    if (res.updated === true)
+                        Actions.replace('settingsScreen')
+                    else
+                        console.log('sin actualizar')
+                })
+                .catch((err: any) => { console.log(err) })
+
     }
 
 
@@ -120,7 +131,7 @@ export default class EditProfileScreen extends React.Component {
                         </Item>
                         <Item floatingLabel last error={this.state.emailError}>
                             <Label>Correo Electrónico</Label>
-                            <Input onChangeText={(emailAddress) => this.setState({ emailAddress })} value={this.state.emailAddress} />
+                            <Input disabled onChangeText={(emailAddress) => this.setState({ emailAddress })} value={this.state.emailAddress} />
                             {(this.state.emailError) ? (
                                 <Icon name='close-circle' />
                             ) : null}

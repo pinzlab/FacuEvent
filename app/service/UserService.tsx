@@ -81,11 +81,37 @@ export default class UserService {
         return await AsyncStorage.removeItem('cookies')
     }
 
-    public async updateProfile() {
-        //'PUT   /api/v1/account/update/profile
+    public async updateProfile(lastName: string, firstName: string, telephone: string) {
+        const headers: any = await JSON.parse(await this.loadCookies())
+        return await fetch(`${serverUrl}/api/v1/account/update/profile`, {
+            headers,
+            method: 'PUT',
+            body: JSON.stringify({
+                lastName,
+                firstName,
+                telephone
+            }),
+        })
+            .then((res: any) => {
+                return (res.status === 200) ? { updated: true } : { updated: false }
+            })
+            .then((res: any) => { return res })
     }
-    public async updatePassword() {
-        //'PUT   /api/v1/account/update/password
+
+
+    public async updatePassword(newPassword: string) {
+        const headers: any = await JSON.parse(await this.loadCookies())
+        return await fetch(`${serverUrl}/api/v1/account/update/password`, {
+            headers,
+            method: 'PUT',
+            body: JSON.stringify({
+                password: newPassword
+            }),
+        })
+            .then((res: any) => {
+                return (res.status === 200) ? { updated: true } : { updated: false }
+            })
+            .then((res: any) => { return res })
     }
 
     public async me() {
