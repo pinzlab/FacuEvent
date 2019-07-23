@@ -4,6 +4,10 @@ import { Body } from 'native-base';
 
 export default class UserService {
 
+    private async loadCookies() {
+        return await AsyncStorage.getItem('cookies');
+    }
+
     public async login(emailAddress: string, password: string, rememberMe?: boolean) {
 
         return await fetch(`${serverUrl}/api/v1/entrance/login`, {
@@ -77,13 +81,20 @@ export default class UserService {
         return await AsyncStorage.removeItem('cookies')
     }
 
+    public async updateProfile() {
+        //'PUT   /api/v1/account/update/profile
+    }
+    public async updatePassword() {
+        //'PUT   /api/v1/account/update/password
+    }
+
     public async me() {
 
-        const cookies: string = await AsyncStorage.getItem('cookies');
-        if (cookies !== null)
-            return await fetch(`${serverUrl}/api/v1/account/me`, { headers: JSON.parse(cookies) })
-                .then((res: any) => res.json())
-                .then((res: any) => { return res })
+        const headers: any = await JSON.parse(await this.loadCookies())
+
+        return await fetch(`${serverUrl}/api/v1/account/me`, { headers })
+            .then((res: any) => res.json())
+            .then((res: any) => { return res })
 
 
     }
