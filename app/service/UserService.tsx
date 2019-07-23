@@ -40,6 +40,37 @@ export default class UserService {
 
     }
 
+    public async signup(lastName: string, firstName: string, emailAddress: string, password: string) {
+
+        return await fetch(`${serverUrl}/api/v1/entrance/signup`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstName,
+                lastName,
+                emailAddress,
+                password
+            }),
+        })
+            .then(async (res: any) => {
+                if (res.status === 200) {
+                    await AsyncStorage.setItem('isLogged', 'true')
+                    await AsyncStorage.setItem('cookies', JSON.stringify({
+                        Accept: 'application/json',
+                        Connection: 'keep-alive',
+                        ETag: res.headers.map.etag,
+                        'Content-Type': 'application/json; charset=utf-8',
+                        'Cache-Control': 'no-cache, no-store',
+                        Cookie: res.headers.map['set-cookie']
+                    }));
+                }
+                return res.json()
+            })
+            .then((res: any) => { return res })
+    }
 
     public async logout() {
         await AsyncStorage.setItem('isLogged', 'false')

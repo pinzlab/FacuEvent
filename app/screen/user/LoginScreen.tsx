@@ -11,12 +11,13 @@ import { color } from '../../util/config'
 export default class LoginScreen extends React.Component {
 
     //checking state for if font is loaded or not.
-    public isLogged: boolean = false;
+
     public state: any = {
         showPassword: true
     }
 
     private login(): void {
+        let isLogged: boolean = false;
         this.setState({
             emailError: (this.state.emailAddress === undefined) ? true : false,
             passwordError: (this.state.password === undefined) ? true : false,
@@ -27,26 +28,22 @@ export default class LoginScreen extends React.Component {
         if (this.state.emailAddress !== undefined || this.state.password !== undefined)
             service.login(this.state.emailAddress, this.state.password)
                 .then((res: any) => {
-                    this.isLogged = res.logged;
+                    isLogged = res.logged;
                 })
                 .catch((err: any) => {
                     if (`${err}`.includes("Unauthorized")) {
                         console.log('Correo electrónico o contraseña invalidas')
-                        this.isLogged = false
+                        isLogged = false
                     }
-                }).finally(
-                    () => {
-                        if (this.isLogged)
-                            Actions.replace('main');
+                }).finally(() => {
+                    if (isLogged)
+                        Actions.replace('main');
 
-                        else
-                            this.setState({
-                                unauthorized: (!this.isLogged) ? true : false,
-                            })
-                    }
-                )
-
-
+                    else
+                        this.setState({
+                            unauthorized: (!isLogged) ? true : false,
+                        })
+                })
     }
 
     render() {
