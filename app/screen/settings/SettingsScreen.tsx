@@ -1,10 +1,11 @@
 import React from 'react';
-import { AsyncStorage } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Container, Content, Button } from 'native-base';
-import { Right, Body, Left, Icon, Text, Spinner } from 'native-base';
-import { Card, Thumbnail, List, ListItem } from 'native-base';
+import { Right, Body, Left, Icon, Text } from 'native-base';
+import { Spinner, Thumbnail, List, ListItem } from 'native-base';
 import UserService from '../../service/UserService';
 import { color } from '../../util/config';
+
 
 
 export default class SettingsScreen extends React.Component {
@@ -46,7 +47,7 @@ export default class SettingsScreen extends React.Component {
                             <List>
                                 <ListItem avatar>
                                     <Left>
-                                        <Thumbnail source={(this.state.user.photo) ? { uri: this.state.user.photo } : require('../../../assets/user.png')} />
+                                        <Thumbnail source={(this.state.user.image) ? { uri: this.state.user.image } : require('../../../assets/user.png')} />
                                     </Left>
                                     <Body>
                                         <Text>Mi cuenta</Text>
@@ -54,7 +55,7 @@ export default class SettingsScreen extends React.Component {
                                     </Body>
 
                                 </ListItem>
-                                <ListItem icon style={{ marginTop: 50 }}>
+                                <ListItem icon style={{ marginTop: 50 }} onPress={() => Actions.editProfileScreen({ user: this.state.user })}>
                                     <Left>
                                         <Button transparent>
                                             <Icon style={{ color: color.secondary, fontSize: 30 }} name="contact" />

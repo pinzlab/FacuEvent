@@ -14,6 +14,7 @@ import { color } from './app/util/config'
 
 import DrawerContent from './app/component/DrawerContent';
 import SettingsScreen from './app/screen/settings/SettingsScreen';
+import EditProfileScreen from './app/screen/user/EditProfileScreen'
 
 
 
@@ -92,6 +93,13 @@ export default class App extends React.Component {
                   navigationBarStyle={{ backgroundColor: color.primary }}
                   titleStyle={{ color: '#fff' }}
                   title="Perfil Profesional" />
+
+                <Scene
+                  key="editProfileScreen"
+                  component={EditProfileScreen}
+                  navigationBarStyle={{ backgroundColor: color.primary }}
+                  titleStyle={{ color: '#fff' }}
+                  title="Editar Perfil" />
 
               </Scene>
 
