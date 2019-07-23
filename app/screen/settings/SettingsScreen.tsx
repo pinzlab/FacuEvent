@@ -68,7 +68,7 @@ export default class SettingsScreen extends React.Component {
                                     <Right><Icon name='arrow-dropright' /></Right>
                                 </ListItem>
 
-                                <ListItem icon style={{ marginTop: 50 }}>
+                                <ListItem icon style={{ marginTop: 50 }} onPress={() => Actions.editPasswordScreen({ user: this.state.user })}>
                                     <Left>
                                         <Button transparent>
                                             <Icon style={{ color: color.secondary, fontSize: 30 }} name="key" />

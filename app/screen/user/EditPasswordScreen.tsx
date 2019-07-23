@@ -1,0 +1,132 @@
+import React from 'react';
+import * as Permissions from 'expo-permissions'
+import * as ImagePicker from 'expo-image-picker'
+import { Actions } from 'react-native-router-flux';
+import { Container, Content, Button } from 'native-base';
+import { Right, Body, Left, Icon, Text, Spinner } from 'native-base';
+import { Card, Thumbnail, List, ListItem } from 'native-base';
+import { View, Form, Item, Label, Input } from 'native-base';
+import { color } from '../../util/config';
+import UserService from '../../service/UserService';
+
+
+export default class EditPasswordScreen extends React.Component {
+
+    public props: any
+    public state: any = {
+        showPassword: true
+    }
+
+
+
+    private isValid(): boolean {
+
+        let isValid: boolean = false;
+        this.setState({
+            passwordError: (this.state.password === undefined) ? true : false,
+            confirmPasswordError: (this.state.confirmPassword === undefined) ? true : false,
+            diferentPassword: (this.state.confirmPassword !== this.state.password) ? true : false,
+            showPassword: true
+        })
+        if (this.state.password !== undefined && !this.state.diferentPassword) {
+            this.setState({
+                smallPassword: (this.state.password.length < 8 && this.state.confirmPassword.length < 8) ? true : false
+            })
+        }
+
+        isValid = (
+            (this.state.password !== undefined || this.state.password !== '') &&
+            (this.state.confirmPassword !== undefined || this.state.confirmPassword !== '') &&
+            this.state.confirmPassword === this.state.password &&
+            this.state.password.length >= 8 && this.state.confirmPassword.length >= 8
+        )
+        return isValid;
+    }
+
+
+
+    public async update() {
+        const service: UserService = new UserService()
+        if (this.isValid())
+            service.updatePassword(this.state.password)
+                .then((res: any) => {
+                    if (res.updated === true)
+                        Actions.replace('settingsScreen')
+                    else
+                        console.log('sin actualizar')
+                })
+                .catch((err: any) => { console.log(err) })
+
+    }
+
+
+    render() {
+
+        return (
+            <Container>
+                <Content>
+                    <List>
+                        <ListItem avatar >
+                            <Left>
+                                <Thumbnail source={(this.props.user.image) ? { uri: this.props.user.image } : require('../../../assets/user.png')} />
+                            </Left>
+                            <Body>
+                                <Text>Mi cuenta</Text>
+                                <Text note>{this.props.user.lastName} {this.props.user.firstName}</Text>
+                            </Body>
+                        </ListItem>
+                    </List>
+                    <Form>
+                        <Item floatingLabel last error={this.state.passwordError || this.state.diferentPassword}>
+                            <Label>Contraseña</Label>
+                            <Input secureTextEntry={this.state.showPassword} onChangeText={(password) => this.setState({ password })} value={this.state.password} />
+                            {(this.state.passwordError || this.state.diferentPassword) ? (
+                                <Icon name='close-circle' />
+                            ) : (
+                                    (
+                                        <Icon
+                                            style={{ color: (this.state.showPassword) ? color.secondary : color.grey }}
+                                            onPress={() => this.setState({ showPassword: !this.state.showPassword })} name='eye' />
+                                    )
+                                )}
+                        </Item>
+                        <Item floatingLabel last error={this.state.confirmPasswordError || this.state.diferentPassword}>
+                            <Label>Confirme Contraseña</Label>
+                            <Input secureTextEntry={this.state.showPassword} onChangeText={(confirmPassword) => this.setState({ confirmPassword })} value={this.state.confirmPassword} />
+                            {(this.state.confirmPasswordError || this.state.diferentPassword) ? (
+                                <Icon name='close-circle' />
+                            ) : (
+                                    (
+                                        <Icon
+                                            style={{ color: (this.state.showPassword) ? color.secondary : color.grey }}
+                                            onPress={() => this.setState({ showPassword: !this.state.showPassword })} name='eye' />
+                                    )
+                                )}
+                        </Item>
+                    </Form>
+                    <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 50 }}>
+
+
+                        {(this.state.diferentPassword || this.state.smallPassword) ? (
+                            <Text style={{
+                                backgroundColor: color.danger,
+                                width: '100%',
+                                marginBottom: 25,
+                                paddingVertical: 5,
+                                textAlign: 'center',
+                                borderRadius: 5,
+                                color: '#fff',
+                            }}>
+                                {(this.state.diferentPassword) ? 'Las contraseñas no coinciden' : 'La nueva contraseña es muy corta'}
+                            </Text>
+                        ) : null}
+
+                        <Button full rounded style={{ backgroundColor: color.primary }} onPress={() => this.update()}>
+                            <Text>Guardar</Text>
+                        </Button>
+                    </View>
+                </Content>
+            </Container>
+        );
+    }
+}
