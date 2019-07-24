@@ -18,7 +18,7 @@ export default class DrawerContent extends React.Component {
                         <ListItem icon onPress={Actions.eventListScreen}>
                             <Left>
                                 <Button transparent>
-                                    <Icon name="calendar" />
+                                    <Icon style={{ color: color.secondary }} name="calendar" />
                                 </Button>
                             </Left>
                             <Body>
@@ -30,9 +30,9 @@ export default class DrawerContent extends React.Component {
                 <Footer style={{ backgroundColor: 'transparent' }}>
                     <FooterTab style={{ backgroundColor: 'transparent' }}>
                         <Button onPress={Actions.settingsScreen}>
-                            <Icon name="settings" />
+                            <Icon style={{ color: color.secondary }} name="settings" />
                         </Button>
-                       <Logout/>
+                        <Logout />
                     </FooterTab>
                 </Footer>
             </Container>

@@ -50,13 +50,16 @@ export default class ActivityScreen extends React.Component {
                                         <Text note>{this.activity.place}</Text>
                                     </Body>
                                 </ListItem>
-                                <ListItem onPress={() => { Actions.professionalScreen({ id: this.activity.inCharge.id }) }}>
-                                    <Body>
-                                        <Text>Persona a Cargo</Text>
-                                        <Text note>{this.activity.inCharge.lastName} {this.activity.inCharge.firstName}</Text>
-                                    </Body>
-                                    <Right><Icon name='arrow-forward' /></Right>
-                                </ListItem>
+                                {(this.activity.inCharge) ? (
+                                    <ListItem onPress={() => { Actions.professionalScreen({ id: this.activity.inCharge.id }) }}>
+                                        <Body>
+                                            <Text>Persona a Cargo</Text>
+                                            <Text note>{this.activity.inCharge.lastName} {this.activity.inCharge.firstName}</Text>
+                                        </Body>
+                                        <Right><Icon name='arrow-forward' /></Right>
+                                    </ListItem>
+                                ) : null}
+
                                 <ListItem >
                                     <Body>
                                         <Text>Hora de inicio</Text>

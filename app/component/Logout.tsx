@@ -2,7 +2,7 @@ import React from 'react';
 import { Actions } from 'react-native-router-flux';
 import { Button, Icon } from 'native-base';
 import UserService from '../service/UserService'
-
+import { color } from '../util/config'
 export default class Logout extends React.Component {
   private async logout() {
     const service: UserService = new UserService()
@@ -17,7 +17,7 @@ export default class Logout extends React.Component {
   render() {
     return (
       <Button onPress={() => this.logout()}>
-        <Icon name="exit" />
+        <Icon style={{ color: color.secondary }} name="exit" />
       </Button>
     );
   }
