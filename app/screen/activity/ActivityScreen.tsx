@@ -1,10 +1,11 @@
 import React from 'react';
 import { Actions } from 'react-native-router-flux';
-import { Container, Content, Button } from 'native-base';
+import { Container, Content } from 'native-base';
 import { Right, Body, Icon, Text, Spinner } from 'native-base';
-import { Card, CardItem, List, ListItem } from 'native-base';
+import { List, ListItem } from 'native-base';
 import ActivityService from '../../service/ActivityService';
-import { color } from '../../util/config';
+
+import Subscription from '../../component/Subcription'
 
 
 export default class ActivityScreen extends React.Component {
@@ -31,6 +32,7 @@ export default class ActivityScreen extends React.Component {
                 console.error(err);
             });
     }
+
 
 
 
@@ -76,22 +78,16 @@ export default class ActivityScreen extends React.Component {
                                     <ListItem >
                                         <Body>
                                             <Text>Cupos disponibles</Text>
-                                            <Text note>{this.activity.quota}</Text>
+                                            <Text note>{this.activity.quota - this.activity.registered}</Text>
                                         </Body>
                                     </ListItem>
                                 ) : null}
 
                             </List>
                             {(this.activity.requireInscription) ? (
-                                <Button
-                                    onPress={() => { console.log(`Suscribirse: "${this.activity.name}"`) }}
-                                    disabled={!(this.activity.quota > 0)}
-                                    full style={{
-                                        backgroundColor: color.secondary,
-                                        marginHorizontal: 10,
-                                        marginVertical: 50
-                                    }}><Text>Inscribirme</Text></Button>
+                                <Subscription activity={this.activity.id} disabled={!(this.activity.quota > 0)} />
                             ) : null}
+
                         </Content>
                         )
                         : (
