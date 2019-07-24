@@ -16,6 +16,7 @@ import DrawerContent from './app/component/DrawerContent';
 import SettingsScreen from './app/screen/settings/SettingsScreen';
 import EditProfileScreen from './app/screen/user/EditProfileScreen'
 import EditPasswordScreen from './app/screen/user/EditPasswordScreen';
+import AssistedScreen from './app/screen/assisted/AssistedScreen';
 
 
 
@@ -45,11 +46,20 @@ export default class App extends React.Component {
 
             <Scene key="root" hideNavBar>
 
+              {/*********************************************************************
+              *                             Authentication                          *
+              *********************************************************************/}
+
               <Scene key="auth" hideNavBar >
                 <Scene key="authentication" component={Authentication} initial hideNavBar />
                 <Scene key="login" component={LoginScreen} hideNavBar />
                 <Scene key="signup" component={SignupScreen} hideNavBar />
               </Scene>
+
+
+              {/*********************************************************************
+              *                                Drawer                               *
+              *********************************************************************/}
 
               <Scene key="main">
                 <Drawer
@@ -58,12 +68,21 @@ export default class App extends React.Component {
                   contentComponent={DrawerContent}
                   drawerWidth={300}>
                   <Scene key='root'>
+
                     <Scene
                       key="eventListScreen"
                       component={EventListScreen}
                       navigationBarStyle={{ backgroundColor: color.primary }}
                       titleStyle={{ color: '#fff' }}
                       title="Eventos" />
+
+                    <Scene
+                      key="assistedScreen"
+                      component={AssistedScreen}
+                      navigationBarStyle={{ backgroundColor: color.primary }}
+                      titleStyle={{ color: '#fff' }}
+                      title="Eventos asistidos" />
+
                     <Scene
                       key="settingsScreen"
                       component={SettingsScreen}
@@ -72,6 +91,11 @@ export default class App extends React.Component {
                       title="Configuraciones" />
                   </Scene>
                 </Drawer>
+
+
+                {/*********************************************************************
+              *                            Secondary Screens                        *
+              *********************************************************************/}
 
                 <Scene
                   key="eventScreen"

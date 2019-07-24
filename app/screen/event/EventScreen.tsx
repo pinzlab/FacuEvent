@@ -13,7 +13,6 @@ export default class EventScreen extends React.Component {
     public event: any;
     public props: any
     public state: any = {
-        // state of charge of events
         isLoading: true
     }
 

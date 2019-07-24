@@ -25,6 +25,17 @@ export default class DrawerContent extends React.Component {
                                 <Text>Eventos</Text>
                             </Body>
                         </ListItem>
+
+                        <ListItem icon onPress={Actions.assistedScreen}>
+                            <Left>
+                                <Button transparent>
+                                    <Icon style={{ color: color.secondary }} name="reorder" />
+                                </Button>
+                            </Left>
+                            <Body>
+                                <Text>Asistidos</Text>
+                            </Body>
+                        </ListItem>
                     </List>
                 </Content>
                 <Footer style={{ backgroundColor: 'transparent' }}>
