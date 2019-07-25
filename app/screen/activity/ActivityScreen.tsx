@@ -10,30 +10,28 @@ import Subscription from '../../component/Subcription'
 
 export default class ActivityScreen extends React.Component {
 
-    public activity: any;
     public props: any
     public state: any = {
         // state of charge of events
         isLoading: true
     }
 
-    componentDidMount() {
-        let service: ActivityService = new ActivityService()
-        service.getById(this.props.id)
-            .then((res: any) => {
-                this.activity = res.activity
-                this.setState({
-                    isLoading: false,
-                }, () => {
-                    this.state.isLoading = false;
-                });
-            })
-            .catch((err: any) => {
-                console.error(err);
-            });
+    async componentDidMount() {
+        await this.loadData()
+            .then(() => this.setState({ isLoading: false }))
     }
 
 
+    private async loadData() {
+        let service: ActivityService = new ActivityService()
+        await service.getById(this.props.id)
+            .then((res: any) => {
+                this.setState({ activity: res.activity })
+            })
+            .catch((err: any) => {
+                console.log(err);
+            });
+    }
 
 
     render() {
@@ -44,19 +42,19 @@ export default class ActivityScreen extends React.Component {
                         ? (<Content>
                             <List>
                                 <ListItem itemHeader first>
-                                    <Text>{this.activity.name.toUpperCase()}</Text>
+                                    <Text>{this.state.activity.name.toUpperCase()}</Text>
                                 </ListItem>
                                 <ListItem >
                                     <Body>
                                         <Text>Lugar</Text>
-                                        <Text note>{this.activity.place}</Text>
+                                        <Text note>{this.state.activity.place}</Text>
                                     </Body>
                                 </ListItem>
-                                {(this.activity.inCharge) ? (
-                                    <ListItem onPress={() => { Actions.professionalScreen({ id: this.activity.inCharge.id }) }}>
+                                {(this.state.activity.inCharge) ? (
+                                    <ListItem onPress={() => { Actions.professionalScreen({ id: this.state.activity.inCharge.id }) }}>
                                         <Body>
                                             <Text>Persona a Cargo</Text>
-                                            <Text note>{this.activity.inCharge.lastName} {this.activity.inCharge.firstName}</Text>
+                                            <Text note>{this.state.activity.inCharge.lastName} {this.state.activity.inCharge.firstName}</Text>
                                         </Body>
                                         <Right><Icon name='arrow-forward' /></Right>
                                     </ListItem>
@@ -65,27 +63,31 @@ export default class ActivityScreen extends React.Component {
                                 <ListItem >
                                     <Body>
                                         <Text>Hora de inicio</Text>
-                                        <Text note>{this.activity.startTime}</Text>
+                                        <Text note>{this.state.activity.startTime}</Text>
                                     </Body>
                                 </ListItem>
                                 <ListItem >
                                     <Body>
                                         <Text>Hora de cierre</Text>
-                                        <Text note>{this.activity.finishTime}</Text>
+                                        <Text note>{this.state.activity.finishTime}</Text>
                                     </Body>
                                 </ListItem>
-                                {(this.activity.requireInscription) ? (
+                                {(this.state.activity.requireInscription) ? (
                                     <ListItem >
                                         <Body>
                                             <Text>Cupos disponibles</Text>
-                                            <Text note>{this.activity.quota - this.activity.registered}</Text>
+                                            <Text note>{this.state.activity.quota - this.state.activity.registered}</Text>
                                         </Body>
                                     </ListItem>
                                 ) : null}
 
                             </List>
-                            {(this.activity.requireInscription) ? (
-                                <Subscription activity={this.activity.id} disabled={!(this.activity.quota > 0)} />
+                            {(this.state.activity.requireInscription) ? (
+                                <Subscription
+                                    activity={this.state.activity.id}
+                                    disabled={!(this.state.activity.quota > 0)}
+                                    onPress={() => { this.loadData() }}
+                                />
                             ) : null}
 
                         </Content>

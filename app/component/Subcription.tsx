@@ -22,6 +22,7 @@ export default class Subcription extends React.Component {
     await service.subscribe(this.props.activity)
       .then((res: any) => {
         this.setState({ hasSubscription: res.subscribed })
+        this.props.onPress();
       })
       .catch((err: any) => console.log(err))
   }

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Rating } from 'react-native-ratings';
 import { Actions } from 'react-native-router-flux';
-import { Container, Content, View } from 'native-base';
-import { Body, Left, Text, Spinner } from 'native-base';
-import { Thumbnail, List, ListItem } from 'native-base';
+import { Container, Content, View, Right } from 'native-base';
+import { Body, Left, Text, Spinner, Button } from 'native-base';
+import { Thumbnail, List, ListItem, Icon } from 'native-base';
 import AssistedService from '../../service/AssistedService';
+import { color } from '../../util/config';
 
 
 export default class AssistedScreen extends React.Component {
@@ -43,14 +44,14 @@ export default class AssistedScreen extends React.Component {
             this.assisteds.forEach((assisted: any, index: number) => {
                 let event = assisted.event;
                 assistedListView.push(
-                    <ListItem key={index} avatar onPress={() => { Actions.eventScreen({ id: event.id }); }}>
+                    <ListItem key={index} avatar>
                         <Left>
                             <Thumbnail square source={{ uri: event.image }} />
                         </Left>
                         <Body >
                             <Text>{event.name}</Text>
                             <Text note>{event.eventDate}</Text>
-                            <View style={{ alignItems: 'flex-end' }}>
+                            <View style={{ alignItems: 'flex-start', marginTop: 15 }}>
                                 <Rating
 
                                     startingValue={assisted.score}
@@ -59,6 +60,11 @@ export default class AssistedScreen extends React.Component {
                                 />
                             </View>
                         </Body>
+                        <Right>
+                            <Button transparent onPress={() => { Actions.eventScreen({ id: event.id }); }}>
+                                <Icon name="eye" style={{ color: color.secondary }} />
+                            </Button>
+                        </Right>
                     </ListItem>
 
 
