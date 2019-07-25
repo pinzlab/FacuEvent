@@ -17,6 +17,7 @@ import SettingsScreen from './app/screen/settings/SettingsScreen';
 import EditProfileScreen from './app/screen/user/EditProfileScreen'
 import EditPasswordScreen from './app/screen/user/EditPasswordScreen';
 import AssistedScreen from './app/screen/assisted/AssistedScreen';
+import RegisterAssistanceScreen from './app/screen/assisted/RegisterAssistanceScreen'
 
 
 
@@ -96,6 +97,15 @@ export default class App extends React.Component {
                 {/*********************************************************************
               *                            Secondary Screens                        *
               *********************************************************************/}
+
+                <Scene
+                  hideNavBar
+                  key="registerAssistanceScreen"
+                  component={RegisterAssistanceScreen}
+                  navigationBarStyle={{ backgroundColor: color.primary }}
+                  titleStyle={{ color: '#FFF' }}
+                  backToInitial
+                  title="Registro de Asistencia" />
 
                 <Scene
                   key="eventScreen"

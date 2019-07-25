@@ -22,7 +22,7 @@ export default class EventService {
 
     }
 
-    public async getByQrCode(qrCode: number) {
+    public async getByQrCode(qrCode: string) {
         const headers: any = await JSON.parse(await this.loadCookies())
         return await fetch(`${serverUrl}/api/v1/event/qr/${qrCode}`, { headers })
             .then((res: any) => res.json())

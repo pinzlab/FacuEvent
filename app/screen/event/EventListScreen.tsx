@@ -4,7 +4,8 @@ import { Image } from 'react-native';
 import { Container, Content } from 'native-base';
 import { Right, Body, Icon, Button, Text } from 'native-base';
 import { Card, CardItem, Spinner } from 'native-base';
-import  EventService  from '../../service/EventService';
+import EventService from '../../service/EventService';
+import QrScanner from '../../component/QrScanner'
 import { color } from '../../util/config';
 
 
@@ -64,6 +65,8 @@ export default class EventListScreen extends React.Component {
                     !this.state.isLoading
                         ? (<Content>
                             {eventsListView}
+
+
                         </Content>
                         )
                         : (
@@ -72,7 +75,7 @@ export default class EventListScreen extends React.Component {
                             </Content>
                         )
                 }
-
+                <QrScanner />
             </Container>
         );
     }

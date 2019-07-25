@@ -25,4 +25,16 @@ export default class AssistedService {
             .then((res: any) => { return res })
 
     }
+
+    public async registerAssistance(eventId: number) {
+        const headers: any = await JSON.parse(await this.loadCookies())
+        return await fetch(`${serverUrl}/api/v1/assistant`, {
+            headers,
+            method: 'POST',
+            body: JSON.stringify({ eventId })
+        })
+            .then((res: any) => res.json())
+            .then((res: any) => { return res })
+
+    }
 }
