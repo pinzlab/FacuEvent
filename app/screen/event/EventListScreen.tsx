@@ -3,8 +3,8 @@ import { StatusBar } from 'react-native'
 import { Actions } from 'react-native-router-flux';
 import { Image } from 'react-native';
 import { Container, Content } from 'native-base';
-import { Right, Body, Icon, Button, Text } from 'native-base';
-import { Card, CardItem, Spinner } from 'native-base';
+import { Right, Body, Icon, Button, Text, Thumbnail } from 'native-base';
+import { Card, CardItem, Spinner, Header, Left, Title } from 'native-base';
 import EventService from '../../service/EventService';
 import QrScanner from '../../component/QrScanner'
 import { color } from '../../util/config';
@@ -62,12 +62,22 @@ export default class EventListScreen extends React.Component {
 
         return (
             <Container>
+                <Header style={{ backgroundColor: color.primary }}>
+                    <Left>
+                        <Thumbnail style={{ width: 48, height: 48 }}
+                            source={require('../../../assets/icon.png')} />
+                    </Left>
+                    <Body>
+                        <Title>FacuEvent</Title>
+                    </Body>
+                    <Right>
+                        <QrScanner />
+                    </Right>
+                </Header>
                 {
                     !this.state.isLoading
                         ? (<Content>
                             {eventsListView}
-
-
                         </Content>
                         )
                         : (
@@ -76,7 +86,7 @@ export default class EventListScreen extends React.Component {
                             </Content>
                         )
                 }
-                <QrScanner />
+
                 <StatusBar hidden />
             </Container>
         );

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Fab, Icon } from 'native-base';
+import { Button, Icon } from 'native-base';
 import * as Permissions from 'expo-permissions';
 import { Actions } from 'react-native-router-flux';
 import { color } from '../util/config'
@@ -23,12 +23,11 @@ export default class BarcodeScannerExample extends React.Component {
     render() {
 
         return (
-            <Fab
-                style={{ backgroundColor: color.secondary }}
-                position="bottomRight"
+            <Button
+                transparent
                 onPress={() => this.getPermissions()}>
                 <Icon name='qr-scanner' />
-            </Fab>
+            </Button>
         );
     }
 }
