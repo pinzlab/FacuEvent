@@ -4,7 +4,7 @@ import { Container, Content } from 'native-base';
 import { Right, Body, Icon, Text, Spinner } from 'native-base';
 import { List, ListItem } from 'native-base';
 import ActivityService from '../../service/ActivityService';
-
+import ToolBar from '../../component/ToolBar'
 import Subscription from '../../component/Subcription'
 
 
@@ -37,6 +37,7 @@ export default class ActivityScreen extends React.Component {
     render() {
         return (
             <Container>
+                <ToolBar title="Actividad"  />
                 {
                     !this.state.isLoading
                         ? (<Content>

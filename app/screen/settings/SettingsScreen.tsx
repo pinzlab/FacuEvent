@@ -4,6 +4,7 @@ import { Container, Content, Button } from 'native-base';
 import { Right, Body, Left, Icon, Text } from 'native-base';
 import { Spinner, Thumbnail, List, ListItem } from 'native-base';
 import UserService from '../../service/UserService';
+import Logout from '../../component/Logout'
 import { color } from '../../util/config';
 
 
@@ -80,6 +81,7 @@ export default class SettingsScreen extends React.Component {
                                     </Body>
                                     <Right><Icon name='arrow-dropright' /></Right>
                                 </ListItem>
+                                <Logout />
                             </List>
                         </Content>
                         )

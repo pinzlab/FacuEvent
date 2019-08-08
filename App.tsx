@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scene, Router, Drawer, } from 'react-native-router-flux';
+import { Scene, Router, Drawer, Tabs } from 'react-native-router-flux';
 import { StyleSheet } from 'react-native'
 import { Container } from 'native-base';
 import * as Font from 'expo-font'; //to include font from expo.
@@ -13,6 +13,7 @@ import ProfessionalScreen from './app/screen/professional/professionalScreen'
 import { color } from './app/util/config'
 
 import DrawerContent from './app/component/DrawerContent';
+import TabsContent from './app/component/TabsContent';
 import SettingsScreen from './app/screen/settings/SettingsScreen';
 import EditProfileScreen from './app/screen/user/EditProfileScreen'
 import EditPasswordScreen from './app/screen/user/EditPasswordScreen';
@@ -59,91 +60,71 @@ export default class App extends React.Component {
 
 
               {/*********************************************************************
-              *                                Drawer                               *
-              *********************************************************************/}
+              *                                TABS                                 *
+              **********************************************************************/}
 
-              <Scene key="main">
-                <Drawer
-                  hideNavBar
-                  key="drawer"
-                  contentComponent={DrawerContent}
-                  drawerWidth={300}>
+              <Scene hideNavBar key="main">
+                <Tabs tabBarComponent={TabsContent} >
                   <Scene key='root'>
-
                     <Scene
+                      hideNavBar
                       key="eventListScreen"
                       component={EventListScreen}
-                      navigationBarStyle={{ backgroundColor: color.primary }}
-                      titleStyle={{ color: '#fff' }}
-                      title="Eventos" />
+                    />
 
                     <Scene
+                      hideNavBar
                       key="assistedScreen"
                       component={AssistedScreen}
-                      navigationBarStyle={{ backgroundColor: color.primary }}
-                      titleStyle={{ color: '#fff' }}
-                      title="Eventos asistidos" />
+                    />
 
                     <Scene
+                      hideNavBar
                       key="settingsScreen"
                       component={SettingsScreen}
-                      navigationBarStyle={{ backgroundColor: color.primary }}
-                      titleStyle={{ color: '#fff' }}
-                      title="Configuraciones" />
+                    />
                   </Scene>
-                </Drawer>
+                </Tabs>
 
 
                 {/*********************************************************************
               *                            Secondary Screens                        *
-              *********************************************************************/}
+                *********************************************************************/}
 
                 <Scene
                   hideNavBar
                   key="registerAssistanceScreen"
                   component={RegisterAssistanceScreen}
-                  navigationBarStyle={{ backgroundColor: color.primary }}
-                  titleStyle={{ color: '#FFF' }}
-                  backToInitial
-                  title="Registro de Asistencia" />
+                />
 
                 <Scene
                   key="eventScreen"
                   component={EventScreen}
-                  navigationBarStyle={{ backgroundColor: color.primary }}
-                  titleStyle={{ color: '#FFF' }}
-                  backToInitial
-                  title="Evento" />
+                />
 
                 <Scene
                   key="activityScreen"
                   component={ActivityScreen}
-                  navigationBarStyle={{ backgroundColor: color.primary }}
-                  titleStyle={{ color: '#fff' }}
-                  title="Actividad" />
+                />
 
                 <Scene
                   key="professionalScreen"
                   component={ProfessionalScreen}
-                  navigationBarStyle={{ backgroundColor: color.primary }}
-                  titleStyle={{ color: '#fff' }}
-                  title="Perfil Profesional" />
+                />
 
                 <Scene
                   key="editProfileScreen"
                   component={EditProfileScreen}
-                  navigationBarStyle={{ backgroundColor: color.primary }}
-                  titleStyle={{ color: '#fff' }}
-                  title="Editar Perfil" />
+                />
 
                 <Scene
                   key="editPasswordScreen"
                   component={EditPasswordScreen}
-                  navigationBarStyle={{ backgroundColor: color.primary }}
-                  titleStyle={{ color: '#fff' }}
-                  title="Editar Contraseña" />
+                />
 
               </Scene>
+
+
 
             </Scene>
           </Router>

@@ -6,6 +6,7 @@ import { Container, Content, Button } from 'native-base';
 import { Right, Body, Left, Icon, Text, Spinner } from 'native-base';
 import { Card, Thumbnail, List, ListItem } from 'native-base';
 import { View, Form, Item, Label, Input } from 'native-base';
+import ToolBar from '../../component/ToolBar'
 import { color } from '../../util/config';
 import UserService from '../../service/UserService';
 
@@ -90,6 +91,7 @@ export default class EditProfileScreen extends React.Component {
 
         return (
             <Container>
+                <ToolBar title="Mi Perfil" subtitle="Información Personal" />
                 <Content>
                     <List>
                         <ListItem avatar onPress={() => this.changeAvatar()}>

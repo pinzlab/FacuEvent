@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Content, Button } from 'native-base';
 import { Right, Body, Icon, Text, Spinner } from 'native-base';
 import { Card, Thumbnail, List, ListItem } from 'native-base';
+import ToolBar from '../../component/ToolBar'
 import  ProfessionalService  from '../../service/ProfessionalService';
 import { color } from '../../util/config';
 
@@ -45,6 +46,7 @@ export default class ProfessionalScreen extends React.Component {
             })
         return (
             <Container>
+                <ToolBar title="Perfil Profesional"  />
                 {
                     !this.state.isLoading
                         ? (<Content>

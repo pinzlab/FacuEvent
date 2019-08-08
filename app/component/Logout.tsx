@@ -1,6 +1,6 @@
 import React from 'react';
 import { Actions } from 'react-native-router-flux';
-import { Button, Icon } from 'native-base';
+import { ListItem, Left, Body, Button, Text, Icon } from 'native-base';
 import UserService from '../service/UserService'
 import { color } from '../util/config'
 export default class Logout extends React.Component {
@@ -16,9 +16,17 @@ export default class Logout extends React.Component {
   }
   render() {
     return (
-      <Button onPress={() => this.logout()}>
-        <Icon style={{ color: color.secondary }} name="exit" />
-      </Button>
+      <ListItem icon style={{ marginTop: 50 }} onPress={() => this.logout()}>
+        <Left>
+          <Button transparent>
+            <Icon style={{ color: color.primary, fontSize: 30 }} name="exit" />
+          </Button>
+        </Left>
+        <Body>
+          <Text>Salir</Text>
+          <Text note>Cerrar session</Text>
+        </Body>
+      </ListItem>
     );
   }
 }

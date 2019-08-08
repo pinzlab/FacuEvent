@@ -4,6 +4,7 @@ import { Image } from 'react-native';
 import { Container, Content } from 'native-base';
 import { Right, Body, Icon, Text, Spinner } from 'native-base';
 import { Card, CardItem, List, ListItem } from 'native-base';
+import ToolBar from '../../component/ToolBar'
 import EventService from '../../service/EventService';
 import { color } from '../../util/config';
 
@@ -48,6 +49,7 @@ export default class EventScreen extends React.Component {
 
         return (
             <Container>
+                <ToolBar title="Evento"  />
                 {
                     !this.state.isLoading
                         ? (<Content>
