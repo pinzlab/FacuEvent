@@ -7,6 +7,7 @@ import Authentication from './app/component/Authentication'
 import LoginScreen from './app/screen/user/LoginScreen'
 import SignupScreen from './app/screen/user/SignupScreen'
 import EventListScreen from './app/screen/event/EventListScreen'
+import ActivityListScreen from './app/screen/activity/ActivityListScreen'
 import EventScreen from './app/screen/event/EventScreen'
 import ActivityScreen from './app/screen/activity/ActivityScreen'
 import ProfessionalScreen from './app/screen/professional/professionalScreen'
@@ -76,6 +77,12 @@ export default class App extends React.Component {
                       hideNavBar
                       key="assistedScreen"
                       component={AssistedScreen}
+                    />
+
+                    <Scene
+                      hideNavBar
+                      key="activityListScreen"
+                      component={ActivityListScreen}
                     />
 
                     <Scene

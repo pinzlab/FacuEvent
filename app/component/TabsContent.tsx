@@ -26,6 +26,12 @@ export default class TabsContent extends React.Component {
       case 'tab3':
         if (this.state.tab !== 'tab3') {
           this.setState({ tab: 'tab3' })
+          Actions.activityListScreen()
+        }
+        break;
+      case 'tab4':
+        if (this.state.tab !== 'tab4') {
+          this.setState({ tab: 'tab4' })
           Actions.settingsScreen()
         }
         break;
@@ -39,10 +45,13 @@ export default class TabsContent extends React.Component {
             <Icon name="home" style={{ color: (this.state.tab === 'tab1') ? color.primary : 'grey' }} />
           </Button>
           <Button onPress={() => this.changeTab('tab2')} transparent >
-            <Icon name="bookmarks" style={{ color: (this.state.tab === 'tab2') ? color.primary : 'grey' }} />
+            <Icon name="calendar" style={{ color: (this.state.tab === 'tab2') ? color.primary : 'grey' }} />
           </Button>
-          <Button onPress={() => this.changeTab('tab3')} transparent  >
-            <Icon name="contact" style={{ color: (this.state.tab === 'tab3') ? color.primary : 'grey' }} />
+          <Button onPress={() => this.changeTab('tab3')} transparent >
+            <Icon name="bookmarks" style={{ color: (this.state.tab === 'tab3') ? color.primary : 'grey' }} />
+          </Button>
+          <Button onPress={() => this.changeTab('tab4')} transparent  >
+            <Icon name="contact" style={{ color: (this.state.tab === 'tab4') ? color.primary : 'grey' }} />
           </Button>
         </FooterTab>
       </Footer>
