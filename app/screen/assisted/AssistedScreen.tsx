@@ -19,7 +19,7 @@ export default class AssistedScreen extends React.Component {
         let service: AssistedService = new AssistedService()
         service.getAssistedEvents()
             .then((res: any) => {
-                this.assisteds = res.assisted
+                this.assisteds = res
                 this.setState({
                     isLoading: false,
                 }, () => {

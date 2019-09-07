@@ -20,7 +20,7 @@ export default class ProfessionalScreen extends React.Component {
         let service: ProfessionalService = new ProfessionalService()
         service.getById(this.props.id)
             .then((res: any) => {
-                this.professional = res.professional
+                this.professional = res
                 this.setState({
                     isLoading: false,
                 }, () => {
@@ -28,7 +28,7 @@ export default class ProfessionalScreen extends React.Component {
                 });
             })
             .catch((err: any) => {
-                console.error(err);
+                console.log(err);
             });
     }
 

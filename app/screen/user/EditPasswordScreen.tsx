@@ -51,10 +51,7 @@ export default class EditPasswordScreen extends React.Component {
         if (this.isValid())
             service.updatePassword(this.state.password)
                 .then((res: any) => {
-                    if (res.updated === true)
-                        Actions.replace('settingsScreen')
-                    else
-                        console.log('sin actualizar')
+                    Actions.replace('settingsScreen')
                 })
                 .catch((err: any) => { console.log(err) })
 

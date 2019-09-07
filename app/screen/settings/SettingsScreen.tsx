@@ -1,4 +1,5 @@
 import React from 'react';
+import { AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Container, Content, Button } from 'native-base';
 import { Right, Body, Left, Icon, Text } from 'native-base';
@@ -21,18 +22,20 @@ export default class SettingsScreen extends React.Component {
     async componentDidMount() {
         const service: UserService = new UserService()
         service.me()
-            .then((res: any) => {
-
-
-                this.setState({
-                    user: res.user,
-                    isLoading: false,
-                }, () => {
-                    this.state.isLoading = false;
-                });
+            .then(async (res: any) => {
+                if (res.isLogged === true) {
+                    this.setState({
+                        user: res.me,
+                        isLoading: false,
+                    });
+                } else {
+                    await AsyncStorage.setItem('isLogged', 'false')
+                    await AsyncStorage.removeItem('cookies')
+                    Actions.replace('login');
+                }
             })
             .catch((err: any) => {
-                console.error(err);
+                console.log('err');
             });
     }
 
@@ -46,16 +49,6 @@ export default class SettingsScreen extends React.Component {
                     !this.state.isLoading
                         ? (<Content>
                             <List>
-                                <ListItem avatar>
-                                    <Left>
-                                        <Thumbnail source={(this.state.user.image) ? { uri: this.state.user.image } : require('../../../assets/user.png')} />
-                                    </Left>
-                                    <Body>
-                                        <Text>Mi cuenta</Text>
-                                        <Text note>{this.state.user.lastName} {this.state.user.firstName}</Text>
-                                    </Body>
-
-                                </ListItem>
                                 <ListItem icon style={{ marginTop: 50 }} onPress={() => Actions.editProfileScreen({ user: this.state.user })}>
                                     <Left>
                                         <Button transparent>

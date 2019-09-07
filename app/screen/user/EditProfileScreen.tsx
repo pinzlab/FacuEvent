@@ -30,9 +30,6 @@ export default class EditProfileScreen extends React.Component {
 
     private async getPermission() {
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        if (status !== 'granted') {
-            alert('Lo sentimos, necesitamos permisos para acceder a las imágenes.');
-        }
         return status;
     }
     private async changeAvatar() {
@@ -44,7 +41,17 @@ export default class EditProfileScreen extends React.Component {
             });
 
             if (!result.cancelled) {
-                this.setState({ image: result.uri });
+                const image: any = {
+                    uri: result.uri,
+                    type: 'image/jpeg',
+                    name: 'testPhotoName'
+                }
+                const formData = new FormData()
+                formData.append('image', image)
+                const service: UserService = new UserService()
+                service.updateAvatar(formData)
+                    .then((res: any) => this.setState({ image: res.url }))
+                    .catch((err: any) => { console.log(err) })
             }
         }
     }
@@ -77,10 +84,7 @@ export default class EditProfileScreen extends React.Component {
                 this.state.firstName,
                 this.state.telephone)
                 .then((res: any) => {
-                    if (res.updated === true)
-                        Actions.replace('settingsScreen')
-                    else
-                        console.log('sin actualizar')
+                    Actions.replace('settingsScreen')
                 })
                 .catch((err: any) => { console.log(err) })
 

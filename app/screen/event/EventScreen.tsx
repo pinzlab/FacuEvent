@@ -21,7 +21,7 @@ export default class EventScreen extends React.Component {
         let service: EventService = new EventService()
         service.getById(this.props.id)
             .then((res: any) => {
-                this.event = res.event
+                this.event = res
                 this.setState({
                     isLoading: false,
                 }, () => {

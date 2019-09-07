@@ -29,9 +29,10 @@ export default class LoginScreen extends React.Component {
         if (this.state.emailAddress !== undefined || this.state.password !== undefined)
             service.login(this.state.emailAddress, this.state.password)
                 .then((res: any) => {
-                    isLogged = res.logged;
+                    isLogged = true;
                 })
                 .catch((err: any) => {
+                    console.log(err)
                     if (`${err}`.includes("Unauthorized")) {
                         console.log('Correo electrónico o contraseña invalidas')
                         isLogged = false
@@ -81,8 +82,12 @@ export default class LoginScreen extends React.Component {
 
                     </Form>
 
-                    <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 50 }}>
+                    <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 25 }}>
 
+                        <Text
+                            style={{ marginBottom:25, color: 'grey', alignSelf: 'flex-end' }}
+                            onPress={() => Actions.push('resetPass')}>
+                            ¿Olvidaste tu contraseña?</Text>
 
                         {(this.state.unauthorized) ? (
                             <Text style={{

@@ -6,6 +6,7 @@ import * as Font from 'expo-font'; //to include font from expo.
 import Authentication from './app/component/Authentication'
 import LoginScreen from './app/screen/user/LoginScreen'
 import SignupScreen from './app/screen/user/SignupScreen'
+import ResetPasswordScreen from './app/screen/user/ResetPasswordScreen'
 import EventListScreen from './app/screen/event/EventListScreen'
 import ActivityListScreen from './app/screen/activity/ActivityListScreen'
 import EventScreen from './app/screen/event/EventScreen'
@@ -57,6 +58,7 @@ export default class App extends React.Component {
                 <Scene key="authentication" component={Authentication} initial hideNavBar />
                 <Scene key="login" component={LoginScreen} hideNavBar />
                 <Scene key="signup" component={SignupScreen} hideNavBar />
+                <Scene key="resetPass" component={ResetPasswordScreen} hideNavBar />
               </Scene>
 
 

@@ -26,7 +26,7 @@ export default class ActivityScreen extends React.Component {
         let service: ActivityService = new ActivityService()
         await service.getById(this.props.id)
             .then((res: any) => {
-                this.setState({ activity: res.activity })
+                this.setState({ activity: res })
             })
             .catch((err: any) => {
                 console.log(err);
@@ -51,11 +51,11 @@ export default class ActivityScreen extends React.Component {
                                         <Text note>{this.state.activity.place}</Text>
                                     </Body>
                                 </ListItem>
-                                {(this.state.activity.inCharge) ? (
-                                    <ListItem onPress={() => { Actions.professionalScreen({ id: this.state.activity.inCharge.id }) }}>
+                                {(this.state.activity.professional) ? (
+                                    <ListItem onPress={() => { Actions.professionalScreen({ id: this.state.activity.professional}) }}>
                                         <Body>
                                             <Text>Persona a Cargo</Text>
-                                            <Text note>{this.state.activity.inCharge.lastName} {this.state.activity.inCharge.firstName}</Text>
+                                            <Text note>{this.state.activity.professional}</Text>
                                         </Body>
                                         <Right><Icon name='arrow-forward' /></Right>
                                     </ListItem>

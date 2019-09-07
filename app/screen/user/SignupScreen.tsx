@@ -1,7 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'react-native'
 import { Actions } from 'react-native-router-flux';
-import { Container, Content } from 'native-base';
+import { Container, Content, Spinner } from 'native-base';
 import { Form, Item, Label, Input, Button, Text } from 'native-base';
 import { Thumbnail, View, Icon } from 'native-base';
 import { color } from '../../util/config'
@@ -43,30 +43,26 @@ export default class SignupScreen extends React.Component {
   }
 
   private signup(): void {
-    let isRegistered: boolean = false;
     const service: UserService = new UserService();
-    if (this.isValid())
+    if (this.isValid()) {
+      this.setState({ loader: true })
       service.signup(
         this.state.lastName,
         this.state.firstName,
         this.state.emailAddress,
         this.state.password)
         .then((res: any) => {
-          isRegistered = res.registered;
-        })
-        .catch((err: any) => {
-          if (`${err}`.includes("Conflict")) {
-            isRegistered = false
+          this.setState({ loader: false })
+          if (res.raw) {
             this.setState({
-              //The provided email address is already in use.
-              conflict: true,
+              conflict: (res.raw === 'emailAlreadyInUse') ? true : undefined
             })
           }
-        })
-        .finally(() => {
-          if (isRegistered)
+          if (res.user) {
             Actions.replace('main');
+          }
         })
+    }
 
   }
 
@@ -142,9 +138,15 @@ export default class SignupScreen extends React.Component {
               }}>{(this.state.diferentPasswordError) ? 'Las contraseñas no coinciden' : 'La dirección de correo electrónico proporcionada ya está en uso.'}</Text>
             ) : null}
 
-            
-            <Button full rounded style={{ backgroundColor: color.primary }} onPress={() => { this.signup() }}>
-              <Text>Registrarse</Text>
+
+
+            <Button
+              full
+              rounded
+              disabled={this.state.loader}
+              style={{ backgroundColor: color.primary }}
+              onPress={() => { this.signup() }}>
+              {(this.state.loader) ? <Spinner color='white' /> : <Text>Registrarse</Text>}
             </Button>
             <Button full rounded style={{ backgroundColor: color.primary, marginVertical: 25 }} onPress={() => { Actions.replace('login') }}>
               <Text>Logearse</Text>

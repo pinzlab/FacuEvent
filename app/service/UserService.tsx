@@ -10,16 +10,15 @@ export default class UserService {
 
     public async login(emailAddress: string, password: string, rememberMe?: boolean) {
 
-        return await fetch(`${serverUrl}/api/v1/entrance/login`, {
-            method: 'PUT',
+        return await fetch(`${serverUrl}/api/v1/account/login`, {
+            method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 emailAddress,
-                password,
-                rememberMe
+                password
             }),
         })
             .then(async (res: any) => {
@@ -46,7 +45,7 @@ export default class UserService {
 
     public async signup(lastName: string, firstName: string, emailAddress: string, password: string) {
 
-        return await fetch(`${serverUrl}/api/v1/entrance/signup`, {
+        return await fetch(`${serverUrl}/api/v1/user/signup`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -78,7 +77,13 @@ export default class UserService {
 
     public async logout() {
         await AsyncStorage.setItem('isLogged', 'false')
-        return await AsyncStorage.removeItem('cookies')
+        await AsyncStorage.removeItem('cookies')
+        const headers: any = await JSON.parse(await this.loadCookies())
+
+        return await fetch(`${serverUrl}/api/v1/account/logout`, {
+            method: 'PUT',
+            headers
+        })
     }
 
     public async updateProfile(lastName: string, firstName: string, telephone: string) {
@@ -98,7 +103,6 @@ export default class UserService {
             .then((res: any) => { return res })
     }
 
-
     public async updatePassword(newPassword: string) {
         const headers: any = await JSON.parse(await this.loadCookies())
         return await fetch(`${serverUrl}/api/v1/account/update/password`, {
@@ -114,6 +118,20 @@ export default class UserService {
             .then((res: any) => { return res })
     }
 
+    public async updateAvatar(avatar: any) {
+        const headers: any = await JSON.parse(await this.loadCookies())
+        headers['Content-Type'] = 'multipart/form-data'
+        return await fetch(`${serverUrl}/file/image/user`, {
+            headers,
+            method: 'PUT',
+            body: avatar
+        })
+            .then((res: any) => {
+                return res.json()
+            })
+            .then((res: any) => { return res })
+    }
+
     public async me() {
 
         const headers: any = await JSON.parse(await this.loadCookies())
@@ -123,5 +141,48 @@ export default class UserService {
             .then((res: any) => { return res })
 
 
+    }
+
+    public async resetPassToken(emailAddress: string) {
+        return await fetch(`${serverUrl}/api/v1/account/password/reset/token`, {
+            method: 'POST',
+            body: JSON.stringify({ emailAddress })
+        })
+            .then((res: any) => { return (res.status === 200) ? { sent: true } : { sent: false } })
+            .then((res: any) => { return res })
+    }
+
+    public async resetPass(token: string, password: string) {
+        return await fetch(`${serverUrl}/api/v1/account/password/reset`, {
+            method: 'POST',
+            body: JSON.stringify({ token, password })
+        })
+            .then(async (res: any) => {
+                let response: any = {}
+                switch (res.status) {
+                    case 200:
+                        response.status = 200
+                        try {
+                            await AsyncStorage.setItem('isLogged', 'true')
+                            await AsyncStorage.setItem('cookies', JSON.stringify({
+                                Accept: 'application/json',
+                                Connection: 'keep-alive',
+                                ETag: res.headers.map.etag,
+                                'Content-Type': 'application/json; charset=utf-8',
+                                'Cache-Control': 'no-cache, no-store',
+                                Cookie: res.headers.map['set-cookie']
+                            }));
+                        } catch (error) {
+                            console.log('error')
+                        }
+
+                        break;
+                    default:
+                        response.status = 403
+                        break;
+                }
+                return response
+            })
+            .then((res: any) => { return res })
     }
 }

@@ -19,7 +19,7 @@ export default class RegisterAssistanceScreen extends React.Component {
     private handleBarCodeScanned = ({ type, data }) => {
         this.setState({ scanned: true });
         console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
-        this.registerAssistance(data)
+        this.registerAssistance(Number(data))
 
     };
 
