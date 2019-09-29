@@ -69,7 +69,7 @@ export default class SignupScreen extends React.Component {
               'password',
               Crypto.encrypt(this.state.emailAddress.split('@')[0], this.state.password).toString()
             )
-            Actions.replace('main');
+            Actions.replace('welcome');
           }
         })
     }

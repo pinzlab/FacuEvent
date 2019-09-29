@@ -1,13 +1,10 @@
-import React from 'react';
-import { Actions } from 'react-native-router-flux';
-import { Rating } from 'react-native-ratings';
-import { Container, Content } from 'native-base';
-import { Right, Body, Icon, Text, Spinner } from 'native-base';
-import { List, ListItem } from 'native-base';
-import ActivityService from '../../service/ActivityService';
-import ToolBar from '../../component/ToolBar'
-import Subscription from '../../component/Subcription'
-import ScoreSubscriptionService from '../../service/ScoreSubscriptionService';
+import React from 'react'
+import { Rating } from 'react-native-ratings'
+import { Container, Content } from 'native-base'
+import { Right, Body, Text, Spinner } from 'native-base'
+import { List, ListItem } from 'native-base'
+import Inexistente from '../../component/Inexistente'
+import ScoreSubscriptionService from '../../service/ScoreSubscriptionService'
 
 
 export default class ActivityListScreen extends React.Component {
@@ -67,11 +64,9 @@ export default class ActivityListScreen extends React.Component {
             <Container>
                 {
                     !this.state.isLoading
-                        ? (<Content>
-                            <List>
-                                {list}
-                            </List>
-                        </Content>
+                        ? ((list.length > 0) 
+                            ? <Content><List>{list}</List></Content>
+                            : <Inexistente title="No hay inscripciones" />
                         )
                         : (
                             <Content>

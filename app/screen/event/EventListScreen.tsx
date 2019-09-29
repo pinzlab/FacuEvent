@@ -7,6 +7,7 @@ import { Right, Body, Text, Thumbnail } from 'native-base'
 import { Card, CardItem, Spinner, Header, Left, Title } from 'native-base'
 import EventService from '../../service/EventService'
 import QrScanner from '../../component/QrScanner'
+import Inexistente from '../../component/Inexistente'
 import { color } from '../../util/config'
 
 
@@ -38,9 +39,9 @@ export default class EventListScreen extends React.Component {
 
 
     render() {
-        let eventsListView: any = []
+        let list: any = []
         this.events.forEach((event: any, index: number) => {
-            eventsListView.push(
+            list.push(
                 <Card key={index} >
                     <TouchableOpacity onPress={() => { Actions.eventScreen({ id: event.id }); }}>
                         <CardItem cardBody>
@@ -73,9 +74,9 @@ export default class EventListScreen extends React.Component {
                 </Header>
                 {
                     !this.state.isLoading
-                        ? (<Content>
-                            {eventsListView}
-                        </Content>
+                        ? ((list.length > 0)
+                            ? <Content>{list}</Content>
+                            : <Inexistente title="No hay eventos" />
                         )
                         : (
                             <Content>

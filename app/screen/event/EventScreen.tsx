@@ -48,7 +48,7 @@ export default class EventScreen extends React.Component {
 
         return (
             <Container>
-                <ToolBar title="Evento"  />
+                <ToolBar title="Evento" />
                 {
                     !this.state.isLoading
                         ? (<Content>
@@ -61,12 +61,16 @@ export default class EventScreen extends React.Component {
                                 <ListItem itemHeader first>
                                     <Text>{this.event.name.toUpperCase()}</Text>
                                 </ListItem>
-                                <ListItem >
-                                    <Body>
-                                        <Text>Descripción</Text>
-                                        <Text note>{this.event.description}</Text>
-                                    </Body>
-                                </ListItem>
+                                {
+                                    (this.event.description) ?
+                                        <ListItem >
+                                            <Body>
+                                                <Text>Descripción</Text>
+                                                <Text note>{this.event.description}</Text>
+                                            </Body>
+                                        </ListItem>
+                                        : null
+                                }
                                 <ListItem >
                                     <Body>
                                         <Text>Lugar de concentración</Text>

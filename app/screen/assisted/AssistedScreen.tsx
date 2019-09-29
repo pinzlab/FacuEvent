@@ -4,6 +4,7 @@ import { Actions } from 'react-native-router-flux';
 import { Container, Content, View, Right } from 'native-base';
 import { Body, Left, Text, Spinner, Button } from 'native-base';
 import { Thumbnail, List, ListItem, Icon } from 'native-base';
+import Inexistente from '../../component/Inexistente'
 import AssistedService from '../../service/AssistedService';
 import { color } from '../../util/config';
 
@@ -39,11 +40,11 @@ export default class AssistedScreen extends React.Component {
 
 
     render() {
-        let assistedListView: any = [];
+        let list: any = [];
         if (this.assisteds !== undefined)
             this.assisteds.forEach((assisted: any, index: number) => {
                 let event = assisted.event;
-                assistedListView.push(
+                list.push(
                     <ListItem key={index} avatar>
                         <Left>
                             <Thumbnail square source={{ uri: event.image }} />
@@ -75,12 +76,9 @@ export default class AssistedScreen extends React.Component {
             <Container>
                 {
                     !this.state.isLoading
-                        ? (<Content>
-                            <List>
-                                {assistedListView}
-                            </List>
-
-                        </Content>
+                        ? ((list.length > 0)
+                            ? <Content><List>{list}</List></Content>
+                            : <Inexistente title="No hay asistencias"/>
                         )
                         : (
                             <Content>

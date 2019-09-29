@@ -12,9 +12,8 @@ import ActivityListScreen from './app/screen/activity/ActivityListScreen'
 import EventScreen from './app/screen/event/EventScreen'
 import ActivityScreen from './app/screen/activity/ActivityScreen'
 import ProfessionalScreen from './app/screen/professional/professionalScreen'
-import { color } from './app/util/config'
 
-import DrawerContent from './app/component/DrawerContent';
+import Welcome from './app/component/Welcome';
 import TabsContent from './app/component/TabsContent';
 import SettingsScreen from './app/screen/settings/SettingsScreen';
 import EditProfileScreen from './app/screen/user/EditProfileScreen'
@@ -59,6 +58,7 @@ export default class App extends React.Component {
                 <Scene key="login" component={LoginScreen} hideNavBar />
                 <Scene key="signup" component={SignupScreen} hideNavBar />
                 <Scene key="resetPass" component={ResetPasswordScreen} hideNavBar />
+                <Scene key="welcome" component={Welcome} hideNavBar/>
               </Scene>
 
 
@@ -99,6 +99,8 @@ export default class App extends React.Component {
                 {/*********************************************************************
               *                            Secondary Screens                        *
                 *********************************************************************/}
+
+
 
                 <Scene
                   hideNavBar

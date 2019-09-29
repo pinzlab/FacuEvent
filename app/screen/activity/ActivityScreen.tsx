@@ -1,6 +1,6 @@
 import React from 'react'
 import { Actions } from 'react-native-router-flux'
-import { Container, Content } from 'native-base';
+import { Container, Content } from 'native-base'
 import { Right, Body, Icon, Text, Spinner } from 'native-base'
 import { List, ListItem } from 'native-base'
 import ActivityService from '../../service/ActivityService'
