@@ -1,6 +1,6 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native'
 import { serverUrl } from '../util/config'
-import { Body } from 'native-base';
+
 
 export default class UserService {
 
@@ -8,8 +8,7 @@ export default class UserService {
         return await AsyncStorage.getItem('cookies');
     }
 
-    public async login(emailAddress: string, password: string, rememberMe?: boolean) {
-
+    public async login(emailAddress: string, password: string) {
         return await fetch(`${serverUrl}/api/v1/account/login`, {
             method: 'POST',
             headers: {

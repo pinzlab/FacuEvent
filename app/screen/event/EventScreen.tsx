@@ -1,12 +1,11 @@
-import React from 'react';
-import { Actions } from 'react-native-router-flux';
-import { Image } from 'react-native';
-import { Container, Content } from 'native-base';
-import { Right, Body, Icon, Text, Spinner } from 'native-base';
-import { Card, CardItem, List, ListItem } from 'native-base';
+import React from 'react'
+import { Actions } from 'react-native-router-flux'
+import { Image } from 'react-native'
+import { Container, Content } from 'native-base'
+import { Right, Body, Icon, Text, Spinner } from 'native-base'
+import { Card, CardItem, List, ListItem } from 'native-base'
 import ToolBar from '../../component/ToolBar'
-import EventService from '../../service/EventService';
-import { color } from '../../util/config';
+import EventService from '../../service/EventService'
 
 
 export default class EventScreen extends React.Component {
@@ -36,7 +35,7 @@ export default class EventScreen extends React.Component {
 
 
     render() {
-        let activitiesListView: any = [];
+        let activitiesListView: any = []
         if (this.event !== undefined)
             this.event.activities.forEach((activity: any, index: number) => {
                 activitiesListView.push(
@@ -66,6 +65,12 @@ export default class EventScreen extends React.Component {
                                     <Body>
                                         <Text>Descripción</Text>
                                         <Text note>{this.event.description}</Text>
+                                    </Body>
+                                </ListItem>
+                                <ListItem >
+                                    <Body>
+                                        <Text>Lugar de concentración</Text>
+                                        <Text note>{this.event.place}</Text>
                                     </Body>
                                 </ListItem>
                                 <ListItem >

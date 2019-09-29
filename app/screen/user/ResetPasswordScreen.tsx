@@ -1,9 +1,10 @@
-import React from 'react';
-import { Actions } from 'react-native-router-flux';
-import { StatusBar } from 'react-native'
-import { Container, Content, Spinner } from 'native-base';
-import { Form, Item, Label, Input, Button, Text } from 'native-base';
-import { Thumbnail, View, Icon } from 'native-base';
+import React from 'react'
+import { Actions } from 'react-native-router-flux'
+import { StatusBar, AsyncStorage } from 'react-native'
+import { Container, Content, Spinner } from 'native-base'
+import { Form, Item, Label, Input, Button, Text } from 'native-base'
+import { Thumbnail, View, Icon } from 'native-base'
+import Crypto from '../../util/crypto'
 import UserService from '../../service/UserService'
 import { color } from '../../util/config'
 export default class ResetPasswordScreen extends React.Component {
@@ -60,9 +61,14 @@ export default class ResetPasswordScreen extends React.Component {
     if (this.isPassValid()) {
       this.setState({ loader: true })
       service.resetPass(this.state.token, this.state.password)
-        .then((res: any) => {
+        .then(async (res: any) => {
           this.setState({ loader: false })
           if (res.status === 200) {
+            console.log(this.state.emailAddress)
+            await AsyncStorage.setItem('password',
+              Crypto.encrypt(this.state.emailAddress.split('@')[0],
+                this.state.password).toString()
+            )
             Actions.replace('main');
           }
         })

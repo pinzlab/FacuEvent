@@ -1,9 +1,9 @@
-import React from 'react';
-import { Actions } from 'react-native-router-flux';
+import React from 'react'
+import { Actions } from 'react-native-router-flux'
 import { Container, Content } from 'native-base';
-import { Right, Body, Icon, Text, Spinner } from 'native-base';
-import { List, ListItem } from 'native-base';
-import ActivityService from '../../service/ActivityService';
+import { Right, Body, Icon, Text, Spinner } from 'native-base'
+import { List, ListItem } from 'native-base'
+import ActivityService from '../../service/ActivityService'
 import ToolBar from '../../component/ToolBar'
 import Subscription from '../../component/Subcription'
 
@@ -37,7 +37,7 @@ export default class ActivityScreen extends React.Component {
     render() {
         return (
             <Container>
-                <ToolBar title="Actividad"  />
+                <ToolBar title="Actividad" />
                 {
                     !this.state.isLoading
                         ? (<Content>
@@ -52,7 +52,7 @@ export default class ActivityScreen extends React.Component {
                                     </Body>
                                 </ListItem>
                                 {(this.state.activity.professional) ? (
-                                    <ListItem onPress={() => { Actions.professionalScreen({ id: this.state.activity.professional}) }}>
+                                    <ListItem onPress={() => { Actions.professionalScreen({ id: this.state.activity.professional }) }}>
                                         <Body>
                                             <Text>Persona a Cargo</Text>
                                             <Text note>{this.state.activity.professional}</Text>
@@ -61,6 +61,12 @@ export default class ActivityScreen extends React.Component {
                                     </ListItem>
                                 ) : null}
 
+                                <ListItem >
+                                    <Body>
+                                        <Text>Fecha</Text>
+                                        <Text note>{this.state.activity.activityDate}</Text>
+                                    </Body>
+                                </ListItem>
                                 <ListItem >
                                     <Body>
                                         <Text>Hora de inicio</Text>

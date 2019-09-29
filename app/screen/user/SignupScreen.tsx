@@ -1,10 +1,11 @@
-import React from 'react';
-import { StatusBar } from 'react-native'
-import { Actions } from 'react-native-router-flux';
-import { Container, Content, Spinner } from 'native-base';
-import { Form, Item, Label, Input, Button, Text } from 'native-base';
-import { Thumbnail, View, Icon } from 'native-base';
+import React from 'react'
+import { StatusBar, AsyncStorage } from 'react-native'
+import { Actions } from 'react-native-router-flux'
+import { Container, Content, Spinner } from 'native-base'
+import { Form, Item, Label, Input, Button, Text } from 'native-base'
+import { Thumbnail, View, Icon } from 'native-base'
 import { color } from '../../util/config'
+import Crypto from '../../util/crypto'
 import UserService from '../../service/UserService'
 
 
@@ -51,7 +52,7 @@ export default class SignupScreen extends React.Component {
         this.state.firstName,
         this.state.emailAddress,
         this.state.password)
-        .then((res: any) => {
+        .then(async (res: any) => {
           this.setState({ loader: false })
           if (res.raw) {
             this.setState({
@@ -59,6 +60,15 @@ export default class SignupScreen extends React.Component {
             })
           }
           if (res.user) {
+            console.log({
+              emailAddress: this.state.emailAddress,
+              password: this.state.password
+            })
+            await AsyncStorage.setItem('emailAddress', this.state.emailAddress)
+            await AsyncStorage.setItem(
+              'password',
+              Crypto.encrypt(this.state.emailAddress.split('@')[0], this.state.password).toString()
+            )
             Actions.replace('main');
           }
         })

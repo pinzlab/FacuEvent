@@ -1,14 +1,15 @@
-import React from 'react';
-import * as Permissions from 'expo-permissions'
-import * as ImagePicker from 'expo-image-picker'
-import { Actions } from 'react-native-router-flux';
-import { Container, Content, Button } from 'native-base';
-import { Right, Body, Left, Icon, Text, Spinner } from 'native-base';
-import { Card, Thumbnail, List, ListItem } from 'native-base';
-import { View, Form, Item, Label, Input } from 'native-base';
+import React from 'react'
+import { AsyncStorage } from 'react-native'
+import { Actions } from 'react-native-router-flux'
+import { Container, Content, Button } from 'native-base'
+import { Body, Left, Icon, Text } from 'native-base'
+import { Thumbnail, List, ListItem } from 'native-base'
+import { View, Form, Item, Label, Input } from 'native-base'
 import ToolBar from '../../component/ToolBar'
 import { color } from '../../util/config';
+import Crypto from '../../util/crypto';
 import UserService from '../../service/UserService';
+
 
 
 export default class EditPasswordScreen extends React.Component {
@@ -22,7 +23,7 @@ export default class EditPasswordScreen extends React.Component {
 
     private isValid(): boolean {
 
-        let isValid: boolean = false;
+        let isValid: boolean = false
         this.setState({
             passwordError: (this.state.password === undefined) ? true : false,
             confirmPasswordError: (this.state.confirmPassword === undefined) ? true : false,
@@ -50,7 +51,9 @@ export default class EditPasswordScreen extends React.Component {
         const service: UserService = new UserService()
         if (this.isValid())
             service.updatePassword(this.state.password)
-                .then((res: any) => {
+                .then(async (res: any) => {
+                    const emailAddress: string = await AsyncStorage.getItem('emailAddress')
+                    await AsyncStorage.setItem('password', Crypto.encrypt(emailAddress.split('@')[0], this.state.password).toString())
                     Actions.replace('settingsScreen')
                 })
                 .catch((err: any) => { console.log(err) })
@@ -62,7 +65,7 @@ export default class EditPasswordScreen extends React.Component {
 
         return (
             <Container>
-                <ToolBar title="Mi perfil" subtitle="Cambiar contrasñas" />
+                <ToolBar title="Mi perfil" subtitle="Cambiar contraseñas" />
                 <Content>
                     <List>
                         <ListItem avatar >

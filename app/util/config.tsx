@@ -1,6 +1,6 @@
 
 // Here goes the web server url
-export let serverUrl: string = 'http://192.168.8.143:1337'
+export let serverUrl: string = 'http://192.168.8.117:1337'
 
 // Colors info https://vuetifyjs.com/en/framework/colors
 export let color: any = {

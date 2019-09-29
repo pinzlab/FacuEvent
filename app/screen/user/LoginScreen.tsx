@@ -1,10 +1,11 @@
-import React from 'react';
-import { StatusBar } from 'react-native'
-import { Actions } from 'react-native-router-flux';
-import { Container, Content } from 'native-base';
-import { Form, Item, Label, Input, Button, Text } from 'native-base';
-import { Thumbnail, View, Icon } from 'native-base';
-import UserService from '../../service/UserService';
+import React from 'react'
+import { StatusBar, AsyncStorage } from 'react-native'
+import { Actions } from 'react-native-router-flux'
+import { Container, Content } from 'native-base'
+import { Form, Item, Label, Input, Button, Text } from 'native-base'
+import { Thumbnail, View, Icon } from 'native-base'
+import Crypto from '../../util/crypto';
+import UserService from '../../service/UserService'
 import { color } from '../../util/config'
 
 
@@ -37,9 +38,15 @@ export default class LoginScreen extends React.Component {
                         console.log('Correo electrónico o contraseña invalidas')
                         isLogged = false
                     }
-                }).finally(() => {
-                    if (isLogged)
+                }).finally(async () => {
+                    if (isLogged) {
+                        await AsyncStorage.setItem('emailAddress', this.state.emailAddress)
+                        await AsyncStorage.setItem(
+                            'password',
+                            Crypto.encrypt(this.state.emailAddress.split('@')[0], this.state.password).toString()
+                        )
                         Actions.replace('main');
+                    }
 
                     else
                         this.setState({
@@ -85,7 +92,7 @@ export default class LoginScreen extends React.Component {
                     <View style={{ alignItems: 'center', marginHorizontal: 10, marginTop: 25 }}>
 
                         <Text
-                            style={{ marginBottom:25, color: 'grey', alignSelf: 'flex-end' }}
+                            style={{ marginBottom: 25, color: 'grey', alignSelf: 'flex-end' }}
                             onPress={() => Actions.push('resetPass')}>
                             ¿Olvidaste tu contraseña?</Text>
 
