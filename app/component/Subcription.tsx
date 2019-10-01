@@ -32,7 +32,7 @@ export default class Subcription extends React.Component {
         onPress={() => this.subscribe()}
         disabled={this.props.disabled}
         full style={{
-          backgroundColor: (this.state.hasSubscription) ? color.grey : color.primary,
+          backgroundColor: (this.state.hasSubscription || this.props.disabled) ? color.grey : color.primary,
           marginHorizontal: 10,
           marginVertical: 50
         }}>

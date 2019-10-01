@@ -18,7 +18,6 @@ export default class RegisterAssistanceScreen extends React.Component {
 
     private handleBarCodeScanned = ({ type, data }) => {
         this.setState({ scanned: true });
-        console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
         this.registerAssistance(Number(data))
 
     };
@@ -27,10 +26,12 @@ export default class RegisterAssistanceScreen extends React.Component {
         const service: AssistedService = new AssistedService()
         await service.registerAssistance(eventId)
             .then((res: any) => {
-                if (res.saved)
+                if (res.code === 'E_UNIQUE' || res.saved)
                     alert(`La asistencia al evento ha sido registrada.`)
             })
-            .catch(() => alert('No se pudo registrar la asistencia, por favor intente de nuevo.'))
+            .catch(() => {
+                alert('No se pudo registrar la asistencia, por favor intente de nuevo.')
+            })
             .finally(() => Actions.pop())
     }
 

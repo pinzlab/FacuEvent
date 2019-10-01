@@ -57,7 +57,7 @@ export default class EventScreen extends React.Component {
                                     <Image source={{ uri: this.event.image }} style={{ height: 250, width: null, flex: 1 }} />
                                 </CardItem>
                             </Card>
-                            <List>
+                            <List style={{marginBottom:10}}>
                                 <ListItem itemHeader first>
                                     <Text>{this.event.name.toUpperCase()}</Text>
                                 </ListItem>

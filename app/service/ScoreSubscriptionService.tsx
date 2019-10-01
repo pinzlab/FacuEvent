@@ -32,7 +32,7 @@ export default class ScoreSubscriptionService {
         return await fetch(`${serverUrl}/api/v1/score/activity/${activityId}`, {
             headers,
             method: 'POST',
-            body: JSON.stringify({ note: score })
+            body: JSON.stringify({ score })
         })
             .then((res: any) => res.json())
             .then((res: any) => { return res })

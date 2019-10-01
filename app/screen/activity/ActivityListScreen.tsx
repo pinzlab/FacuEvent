@@ -34,10 +34,8 @@ export default class ActivityListScreen extends React.Component {
     }
 
     private updateScore(activityId: number, score: number) {
-        console.log(`actividad: ${activityId}, score: ${score} `)
         const service: ScoreSubscriptionService = new ScoreSubscriptionService()
         service.score(activityId, score)
-            .then((res) => { console.log(res) })
             .catch((err) => { console.log(err) })
     }
 
@@ -52,7 +50,7 @@ export default class ActivityListScreen extends React.Component {
                     </Body>
                     <Right>
                         <Rating
-                            startingValue={element.note}
+                            startingValue={element.score}
                             imageSize={25}
                             onFinishRating={(score) => this.updateScore(element.activity.id, score)}
                         />

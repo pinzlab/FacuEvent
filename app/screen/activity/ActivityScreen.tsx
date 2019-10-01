@@ -52,10 +52,10 @@ export default class ActivityScreen extends React.Component {
                                     </Body>
                                 </ListItem>
                                 {(this.state.activity.professional) ? (
-                                    <ListItem onPress={() => { Actions.professionalScreen({ id: this.state.activity.professional }) }}>
+                                    <ListItem onPress={() => { Actions.professionalScreen({ id: this.state.activity.professional.id }) }}>
                                         <Body>
                                             <Text>Persona a Cargo</Text>
-                                            <Text note>{this.state.activity.professional}</Text>
+                                            <Text note>{this.state.activity.professional.lastName} {this.state.activity.professional.firstName}</Text>
                                         </Body>
                                         <Right><Icon name='arrow-forward' /></Right>
                                     </ListItem>
@@ -73,12 +73,16 @@ export default class ActivityScreen extends React.Component {
                                         <Text note>{this.state.activity.startTime}</Text>
                                     </Body>
                                 </ListItem>
-                                <ListItem >
-                                    <Body>
-                                        <Text>Hora de cierre</Text>
-                                        <Text note>{this.state.activity.finishTime}</Text>
-                                    </Body>
-                                </ListItem>
+                                {
+                                    (this.state.activity.finishTime) ?
+                                        <ListItem >
+                                            <Body>
+                                                <Text>Hora de cierre</Text>
+                                                <Text note>{this.state.activity.finishTime}</Text>
+                                            </Body>
+                                        </ListItem>
+                                        : null
+                                }
                                 {(this.state.activity.requireInscription) ? (
                                     <ListItem >
                                         <Body>
@@ -92,7 +96,10 @@ export default class ActivityScreen extends React.Component {
                             {(this.state.activity.requireInscription) ? (
                                 <Subscription
                                     activity={this.state.activity.id}
-                                    disabled={!(this.state.activity.quota > 0)}
+                                    disabled={!(
+                                        (this.state.activity.quota > 0)
+                                        && (new Date(this.state.activity.activityDate) > new Date())
+                                    )}
                                     onPress={() => { this.loadData() }}
                                 />
                             ) : null}
